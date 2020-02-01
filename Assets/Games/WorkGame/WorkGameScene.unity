@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 96091555}
   - component: {fileID: 96091554}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: GameSequence
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -150,6 +150,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49e51a20b7a7e1c47bebee8f4fabfe8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offset: 1
+  buttonSpritePrefab: {fileID: 8641331635792625045, guid: 0eb36b8c02b78d345a6ac6a88b8fb38a,
+    type: 3}
+  buttonSprites:
+  - {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!4 &96091555
 Transform:
   m_ObjectHideFlags: 0
