@@ -7,6 +7,14 @@ using UnityEngine;
 
 namespace Assets.Scripts.TypeRacer
 {
+    public enum TextColor
+    {
+        NORMAL,
+        SUCCESS,
+        FAILURE,
+        CURSOR
+    }
+
     public class ColoredText
     {
         public string rawText;
@@ -22,7 +30,7 @@ namespace Assets.Scripts.TypeRacer
 
         public string ComputeColoredText() => list.Aggregate("", (acc, charData) => acc + charData.coloredString);
 
-        public void SetColorAt(int index, string color)
+        public void SetColorAt(int index, TextColor color)
         {
             var data = list[index];
 
@@ -35,7 +43,7 @@ namespace Assets.Scripts.TypeRacer
 
         public class ColoredCharData
         {
-            public string color;
+            public TextColor color;
             public char c;
             public string coloredString;
             public KeyCode code;
@@ -44,17 +52,18 @@ namespace Assets.Scripts.TypeRacer
             {
                 this.c = c;
                 code = MapCharToKeyCode(c);
-                color = "black";
+                color = TextColor.NORMAL;
                 coloredString = FormatColoredChar();
             }
 
-            public void SetColor(string color)
+            public void SetColor(TextColor color)
             {
                 this.color = color;
                 coloredString = FormatColoredChar();
             }
 
-            private string FormatColoredChar() => $"<color={color}>{c}</color>";
+            private string FormatColoredChar() => 
+                $"<color={GetColorFrom(color)}>{(color == TextColor.CURSOR ? "\u0331" : "") + c}</color>";
 
             private KeyCode MapCharToKeyCode(char c)
             {
@@ -69,6 +78,22 @@ namespace Assets.Scripts.TypeRacer
                     default:
                         Enum.TryParse(c.ToString(), true, out KeyCode key);
                         return key;
+                }
+            }
+
+            private string GetColorFrom(TextColor textColor)
+            {
+                switch (textColor)
+                {
+                    case TextColor.SUCCESS:
+                        return "#5cac48";
+                    case TextColor.FAILURE:
+                        return "#832121";
+                    case TextColor.CURSOR:
+                        return "#e53366";
+                    case TextColor.NORMAL:
+                    default:
+                        return "black";
                 }
             }
         }
