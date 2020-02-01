@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class JoystickGame : MonoBehaviour
@@ -15,7 +14,6 @@ public class JoystickGame : MonoBehaviour
     public GameObject buttonSpritePrefab;
     public Sprite[] buttonSprites = new Sprite[ButtonCount];
 
-    int Difficulty = 1;
     bool Finish = false;
 
     enum SequenceButtons
@@ -27,24 +25,15 @@ public class JoystickGame : MonoBehaviour
     }
 
     Queue<SequenceButtons> ButtonQueue = new Queue<SequenceButtons>();
-    int SequenceLength = 0;
-    int SequenceCount = 0;
+    List<SpriteRenderer> ButtonSpriteList = new List<SpriteRenderer>();
+    int SpriteListIndex = 0;
+    int InitSequenceLength = 5;
+    int SequeneLength = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        this.SequenceLength = Difficulty * 5;
-        GenerateSequence();
-
-        PlaySequence();
-        //if (Random.Range(0, 2) == 0)
-        //{
-        //    PlaySequence();
-        //}
-        //else
-        //{
-        //    PlaySimonSays();
-        //}
+        GenerateSequence(this.InitSequenceLength);
     }
 
     // Update is called once per frame
@@ -64,17 +53,13 @@ public class JoystickGame : MonoBehaviour
             {
                 Debug.Log("Dequeued " + peeked);
                 ButtonQueue.Dequeue();
-                if (ButtonQueue.Count == 0 && SequenceCount < Difficulty)
-                {
-                    SequenceCount++;
-                    Debug.Log("Round #" + SequenceCount + " finish!");
-                    if (SequenceCount == Difficulty) {
-                        Finish = true;
-                    }
-                        Debug.Log("Game Finish");
-
-                    GenerateSequence();
-                }
+                ButtonSpriteList[SpriteListIndex].color = new Color(ButtonSpriteList[SpriteListIndex].color.r / 2,
+                                                                    ButtonSpriteList[SpriteListIndex].color.g / 2,
+                                                                    ButtonSpriteList[SpriteListIndex].color.b / 2,
+                                                                    ButtonSpriteList[SpriteListIndex].color.a / 2);
+                SpriteListIndex++;
+                GenerateSequence(1);
+                transform.position = new Vector3(transform.position.x - 1, transform.position.y);
             }
             else if (buttonMask != 0)
             {
@@ -83,41 +68,20 @@ public class JoystickGame : MonoBehaviour
         }
     }
 
-    void GenerateSequence()
+    void GenerateSequence(int length)
     {
-        ButtonQueue.Clear();
-        for (int i = 0; i < this.SequenceLength; i++)
+        for (int i = 0; i < length; i++)
         {
             SequenceButtons tmpButton = (SequenceButtons)Random.Range(0, ButtonCount);
+            Debug.Log("Adding Button " + tmpButton);
             ButtonQueue.Enqueue(tmpButton);
-        }
-    }
-
-    void PlaySimonSays()
-    {
-
-        Debug.Log("Play SimonSays");
-        SequenceButtons[] ButtonSequenceArray = ButtonQueue.ToArray();
-        for (int i = 0; i < ButtonSequenceArray.Length; i++)
-        {
-            // Show button
-            Debug.Log(ButtonSequenceArray[i]);
-            // Wait 1 sec 
-            // Hide button
-        }
-    }
-    void PlaySequence()
-    {
-        Debug.Log("Play Button Sequence");
-        int index = 0;
-        foreach (var button in ButtonQueue)
-        {
-            Debug.Log(button);
-            Sprite sprite = buttonSprites[(int)button];
-            GameObject obj = Instantiate(buttonSpritePrefab, new Vector3(index * offset, 0f), Quaternion.identity, transform);
+            Sprite sprite = buttonSprites[(int)tmpButton];
+            GameObject obj = Instantiate(buttonSpritePrefab, new Vector3(SequeneLength, 0f), Quaternion.identity, transform);
             SpriteRenderer renderer = obj.GetComponent<SpriteRenderer>();
             renderer.sprite = sprite;
-            index++;
+            ButtonSpriteList.Add(renderer);
+            if (SequeneLength < InitSequenceLength)
+                SequeneLength++;
         }
     }
 }
