@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 315475c3662ce454485e993ba7b47861, type: 3}
   m_Name: Level1
   m_EditorClassIdentifier: 
-  WorkSpeed: 0.1
-  StudySpeed: 0.08
-  SleepSpeed: 0.05
+  GlobalSpeed: 1
+  WorkTimer: 2
+  StudyTimer: 2
+  SleepTimer: 2
