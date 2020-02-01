@@ -6,6 +6,6 @@ public class SheepWall : MonoBehaviour
 {
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Ouch!!");
+        Debug.Log("Wall!!");
     }
 }
