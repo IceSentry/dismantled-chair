@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Games/Sheep/SheepGame2.unity
     guid: 3a7de2e9fd6c5ce40b9208f9dd0bf253
+  - enabled: 1
+    path: Assets/Games/TypeRacer/TypeRacerScene.unity
+    guid: aa37706c10118aa4a8a3cc1eb73194a1
   m_configObjects: {}
