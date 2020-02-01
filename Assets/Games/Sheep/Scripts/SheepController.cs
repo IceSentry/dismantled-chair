@@ -7,11 +7,13 @@ public class SheepController : MonoBehaviour
     public float speed = 5f, distance = 1f;
     public GameObject activeIndicator;
 
+    Vector3 startingPos;
     Rigidbody2D rigid;
     bool isActive = false;
 
     private void Start()
     {
+        startingPos = transform.position;
         rigid = GetComponent<Rigidbody2D>();
     }
 
@@ -38,7 +40,7 @@ public class SheepController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        GameManager.Instance.EndGame(false);
+        transform.position = startingPos;
         Debug.Log("Ouch!!");
     }
 }
