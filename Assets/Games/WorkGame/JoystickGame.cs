@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class JoystickGame : MonoBehaviour
 {
-    int Difficulty = 1;
-
     const string Button_A_string = "Button_A";
     const string Button_B_string = "Button_B";
     const string Button_X_string = "Button_X";
     const string Button_Y_string = "Button_Y";
-    int ButtonCount = 4;
-    bool Finish = false;
 
-    Dictionary<SequenceButtons, string> ButtonsMap = new Dictionary<SequenceButtons, string>();
+    const int ButtonCount = 4;
+
+    public float offset = 1f;
+    public GameObject buttonSpritePrefab;
+    public Sprite[] buttonSprites = new Sprite[ButtonCount];
+
+    int Difficulty = 1;
+    bool Finish = false;
 
     enum SequenceButtons
     {
@@ -31,16 +34,17 @@ public class JoystickGame : MonoBehaviour
     void Start()
     {
         this.SequenceLength = Difficulty * 5;
-        initButtonsMap();
         GenerateSequence();
-        if (Random.Range(0, 2) == 0)
-        {
-            PlaySequence();
-        }
-        else
-        {
-            PlaySimonSays();
-        }
+
+        PlaySequence();
+        //if (Random.Range(0, 2) == 0)
+        //{
+        //    PlaySequence();
+        //}
+        //else
+        //{
+        //    PlaySimonSays();
+        //}
     }
 
     // Update is called once per frame
@@ -77,8 +81,6 @@ public class JoystickGame : MonoBehaviour
                 Debug.Log("Wrong Button");
             }
         }
-
-
     }
 
     void GenerateSequence()
@@ -89,14 +91,6 @@ public class JoystickGame : MonoBehaviour
             SequenceButtons tmpButton = (SequenceButtons)Random.Range(0, ButtonCount);
             ButtonQueue.Enqueue(tmpButton);
         }
-    }
-
-    void initButtonsMap()
-    {
-        ButtonsMap.Add(SequenceButtons.Button_A, Button_A_string);
-        ButtonsMap.Add(SequenceButtons.Button_B, Button_B_string);
-        ButtonsMap.Add(SequenceButtons.Button_X, Button_X_string);
-        ButtonsMap.Add(SequenceButtons.Button_Y, Button_Y_string);
     }
 
     void PlaySimonSays()
@@ -115,11 +109,15 @@ public class JoystickGame : MonoBehaviour
     void PlaySequence()
     {
         Debug.Log("Play Button Sequence");
-        SequenceButtons[] ButtonSequenceArray = ButtonQueue.ToArray();
-        for (int i = 0; i < ButtonSequenceArray.Length; i++)
+        int index = 0;
+        foreach (var button in ButtonQueue)
         {
-            Debug.Log(ButtonSequenceArray[i]);
+            Debug.Log(button);
+            Sprite sprite = buttonSprites[(int)button];
+            GameObject obj = Instantiate(buttonSpritePrefab, new Vector3(index * offset, 0f), Quaternion.identity, transform);
+            SpriteRenderer renderer = obj.GetComponent<SpriteRenderer>();
+            renderer.sprite = sprite;
+            index++;
         }
-
     }
 }
