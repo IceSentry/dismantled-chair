@@ -75,23 +75,28 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             LoadGame(GameType.Work);
         }
-        else if (Input.GetKeyDown(KeyCode.S))
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             LoadGame(GameType.Study);
         }
-        else if (Input.GetKeyDown(KeyCode.D))
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             LoadGame(GameType.Sleep);
         }
     }
 
-    public void EndGame(GameType type, int reward)
+    public void SendReward(GameType type, int reward)
     {
         sliders[(int)type].value -= reward;
+    }
+
+    public void EndGame(GameType type, int reward)
+    {
+        SendReward(type, reward);
         LoadGame(currentType);
     }
 
