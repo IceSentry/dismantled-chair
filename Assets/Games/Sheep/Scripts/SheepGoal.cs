@@ -7,6 +7,6 @@ public class SheepGoal : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Yeah Goal");
-        GameManager.Instance.EndGame(true);
+        GameManager.Instance.EndGame(GameType.Sleep, 1);
     }
 }

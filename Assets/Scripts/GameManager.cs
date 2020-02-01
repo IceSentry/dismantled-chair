@@ -8,8 +8,7 @@ public enum GameType
 {
     Work,
     Study,
-    Sleep,
-    Count
+    Sleep
 }
 
 [System.Serializable]
@@ -21,20 +20,25 @@ public class PairGameTypeSceneIndex
 
 public class GameManager : MonoBehaviour
 {
+    const int GAMETYPE_COUNT = 3;
+
     public static GameManager Instance { get; private set; }
 
     [Header("GameObject")]
     public Slider[] sliders;
 
     [Header("Data")]
-    public GameConfig[] difficulty;
+    public GameConfig[] gameConfigs;
     public PairGameTypeSceneIndex[] scenes;
 
     GameType game;
     List<int>[] gameLists;
+    int difficulty;
 
     GameType currentType;
     int currentScene = -1;
+
+    float[] gameTimers;
 
     private void Awake()
     {
@@ -44,9 +48,9 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        int gametypeCount = (int)GameType.Count;
-        gameLists = new List<int>[gametypeCount];
-        for (int i = 0; i < gametypeCount; i++)
+        gameTimers = new float[GAMETYPE_COUNT];
+        gameLists = new List<int>[GAMETYPE_COUNT];
+        for (int i = 0; i < GAMETYPE_COUNT; i++)
             gameLists[i] = new List<int>();
 
         for (int i = 0; i < scenes.Length; i++)
@@ -59,10 +63,17 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GameConfig config = difficulty[0];
-        sliders[(int)GameType.Work].normalizedValue += Time.deltaTime * config.WorkSpeed;
-        sliders[(int)GameType.Study].normalizedValue += Time.deltaTime * config.StudySpeed;
-        sliders[(int)GameType.Sleep].normalizedValue += Time.deltaTime * config.SleepSpeed;
+        GameConfig config = gameConfigs[difficulty];
+        for (int i = 0; i < gameTimers.Length; i++)
+        {
+            float timer = config.GetTimer((GameType)i);
+            gameTimers[i] += Time.deltaTime * config.GlobalSpeed;
+            if (gameTimers[i] >= timer)
+            {
+                sliders[i].value += 1;
+                gameTimers[i] -= timer;
+            }
+        }
 
         if (Input.GetKeyDown(KeyCode.A))
         {
@@ -78,8 +89,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void EndGame(bool success)
+    public void EndGame(GameType type, int reward)
     {
+        sliders[(int)type].value -= reward;
         LoadGame(currentType);
     }
 
