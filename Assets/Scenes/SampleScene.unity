@@ -1252,6 +1252,8 @@ MonoBehaviour:
     game: 2
   - scene: 2
     game: 2
+  - scene: 3
+    game: 1
 --- !u!4 &1363217901
 Transform:
   m_ObjectHideFlags: 0
