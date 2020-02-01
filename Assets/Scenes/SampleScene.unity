@@ -524,7 +524,7 @@ GameObject:
   m_Component:
   - component: {fileID: 670197483}
   m_Layer: 5
-  m_Name: Gauge
+  m_Name: LowerHalf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -561,7 +561,7 @@ GameObject:
   - component: {fileID: 701342120}
   - component: {fileID: 701342121}
   m_Layer: 5
-  m_Name: Work (1)
+  m_Name: Study
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -723,7 +723,7 @@ GameObject:
   - component: {fileID: 770851847}
   - component: {fileID: 770851848}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: Gauges
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1241,6 +1241,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efd7bc33956f73444b5e2aac0a9ae827, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sliders:
+  - {fileID: 1653141550}
+  - {fileID: 701342121}
+  - {fileID: 1660706033}
+  difficulty:
+  - {fileID: 11400000, guid: ab16997e6f0fd9b4482f121ba4078bf0, type: 2}
   scenes:
   - scene: 1
     game: 2
@@ -1360,7 +1366,7 @@ GameObject:
   - component: {fileID: 1660706032}
   - component: {fileID: 1660706033}
   m_Layer: 5
-  m_Name: Work (2)
+  m_Name: Sleep
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

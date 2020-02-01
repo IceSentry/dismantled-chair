@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public enum GameType
 {
@@ -12,7 +13,7 @@ public enum GameType
 }
 
 [System.Serializable]
-public struct PairGameTypeSceneIndex
+public class PairGameTypeSceneIndex
 {
     public int scene;
     public GameType game;
@@ -22,6 +23,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
+    [Header("GameObject")]
+    public Slider[] sliders;
+
+    [Header("Data")]
+    public GameConfig[] difficulty;
     public PairGameTypeSceneIndex[] scenes;
 
     GameType game;
@@ -53,6 +59,11 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        GameConfig config = difficulty[0];
+        sliders[(int)GameType.Work].normalizedValue += Time.deltaTime * config.WorkSpeed;
+        sliders[(int)GameType.Study].normalizedValue += Time.deltaTime * config.StudySpeed;
+        sliders[(int)GameType.Sleep].normalizedValue += Time.deltaTime * config.SleepSpeed;
+
         if (Input.GetKeyDown(KeyCode.A))
         {
             LoadGame(GameType.Work);
