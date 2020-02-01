@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Games/Sheep/SheepGame.unity
+    guid: 134ab6cafe89ac541944a692c35712ed
+  - enabled: 1
+    path: Assets/Games/Sheep/SheepGame2.unity
+    guid: 3a7de2e9fd6c5ce40b9208f9dd0bf253
   m_configObjects: {}
