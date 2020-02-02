@@ -6,7 +6,9 @@ public class PopupGameManager : MonoBehaviour
 {
     public List<GameObject> popupGameList;
     public static PopupGameManager Instance { get; private set; }
+    public int rewardValue = 1;
     private GameObject currentPopup;
+
     private void Awake()
     {
         Instance = this;
@@ -23,13 +25,13 @@ public class PopupGameManager : MonoBehaviour
         currentPopup = Instantiate(popup, transform, false);
         var renderer = currentPopup.GetComponent<SpriteRenderer>();
         renderer.enabled = true;
-
     }
 
     public void ClosePopup()
     {
         Debug.Log("Debug");
         Destroy(currentPopup);
+        GameManager.Instance.SendReward(GameType.Work, rewardValue);
         CreatePopup();
     }
 

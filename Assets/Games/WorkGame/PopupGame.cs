@@ -15,10 +15,6 @@ public class PopupGame : MonoBehaviour
 
     const int MaxGameCount = 3;
 
-    int Difficulty = 1;
-
-    int GameCount = 0;
-
     enum SequenceButtons
     {
         Button_A,
@@ -107,14 +103,14 @@ public class PopupGame : MonoBehaviour
 
     void AddButtons()
     {
-        for (int i = 0; i < buttonIcons.Length; i++)
+        foreach (SpriteRenderer buttonSpanwer in buttonSpawners)
         {
             SequenceButtons tmpButton = (SequenceButtons)Random.Range(0, ButtonCount);
             ButtonQueue.Enqueue(tmpButton);
             Sprite sprite = buttonIcons[(int)tmpButton];
-            buttonSpawners[i].GetComponent<SpriteRenderer>().sprite = sprite;
-            ButtonSpriteList.Add(buttonSpawners[i]);
-            buttonSpawners[i].enabled = true;
+            buttonSpanwer.GetComponent<SpriteRenderer>().sprite = sprite;
+            ButtonSpriteList.Add(buttonSpanwer);
+            buttonSpanwer.enabled = true;
         }
     }
 }

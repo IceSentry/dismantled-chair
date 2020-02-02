@@ -107,7 +107,6 @@ MonoBehaviour:
   - {fileID: 1221100139406994889}
   - {fileID: 1221100139060118643}
   - {fileID: 1221100137986807567}
-  - {fileID: 0}
   buttonIcons:
   - {fileID: -8191739510646017925, guid: a1178578399e9704fbf5910c8e61c850, type: 3}
   - {fileID: 8359661988393023892, guid: a1178578399e9704fbf5910c8e61c850, type: 3}
