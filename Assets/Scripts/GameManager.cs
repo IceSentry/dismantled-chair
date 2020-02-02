@@ -128,6 +128,10 @@ public class GameManager : MonoBehaviour
 
         gameState = GameState.During;
         eventManager.enabled = true;
+        for (int i = 0; i < sliders.Length; i++)
+        {
+            sliders[i].value -= 1;
+        }
     }
 
     void DuringPlay()
