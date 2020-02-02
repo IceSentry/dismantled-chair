@@ -154,15 +154,15 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetButtonDown("Button_A"))
         {
-            LoadGame(GameType.Work);
+            EnterGame(GameType.Work);
         }
         else if (Input.GetKeyDown(KeyCode.Return))
         {
-            LoadGame(GameType.Study);
+            EnterGame(GameType.Study);
         }
         else if (Input.GetMouseButtonDown(0))
         {
-            LoadGame(GameType.Sleep);
+            EnterGame(GameType.Sleep);
         }
     }
 
@@ -176,11 +176,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void LoadGame(GameType type)
+    void EnterGame(GameType type)
     {
         if (type == currentType && currentScene > 0)
             return;
 
+        LoadGame(type);
+    }
+
+    void LoadGame(GameType type)
+    {
         UnloadCurrentScene();
 
         if (visualGameStates[(int)currentType] != null)
