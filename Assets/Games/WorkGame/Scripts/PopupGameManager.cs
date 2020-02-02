@@ -35,8 +35,6 @@ public class PopupGameManager : MonoBehaviour
         gameIndex++;
         if (gameIndex == popupGameArray.Length)
             gameIndex = 0;
-
-
     }
 
     public void ClosePopup()
