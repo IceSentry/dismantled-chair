@@ -9,9 +9,11 @@ public class TypeRacerSystem : MonoBehaviour
     public Text textComponent;
     public Text WPMText;
     public int wordCountForPoints;
+    public int pointsPerWord;
     public bool useDebug;
     public Transform shakeTarget;
     public float shakeDuration;
+    public Vector3 shakeStrength;
 
     private List<string> dictionary = new List<string>() {
         "Gender is pertinent to many disciplines, such as literary theory, drama studies, " +
@@ -47,7 +49,7 @@ public class TypeRacerSystem : MonoBehaviour
 
         "According to all known laws of aviation, there is no way a bee should be able to fly. " +
         "Its wings are too small to get its fat little body off the ground. The bee, of course, " +
-        "flies anyway because bees don't care what humans think is impossible. " +
+        "flies anyway because bees do not care what humans think is impossible. " +
         "Yellow, black. Yellow, black. Yellow, black. Yellow, black.",
 
         "It deos not mttaer in waht oredr the ltteers in a wrod are, the olny iprmoetnt tihng is " +
@@ -57,9 +59,9 @@ public class TypeRacerSystem : MonoBehaviour
 
         "Is this the real life. Is this just fantasy. Caught in a landslide, No escape from reality. " +
         "Open your eyes, Look up to the skies and see, I m just a poor boy, I need no sympathy, " +
-        "Because I'm easy come, easy go, Little high, little low,",
+        "Because I m easy come, easy go, Little high, little low,",
 
-        "Somebody once told me the world is gonna roll me. I aint the sharpest tool in the shed." +
+        "Somebody once told me the world is gonna roll me. I aint the sharpest tool in the shed. " +
         "She was looking kind of dumb with her finger and her thumb. In the shape of an L on her forehead"
     };
 
@@ -92,6 +94,8 @@ public class TypeRacerSystem : MonoBehaviour
     {
         shakeTimeRemaining -= Time.deltaTime;
         time += Time.deltaTime;
+        UpdateWPM();
+
         if (index >= coloredStringToRace.list.Count)
         {
             ChangeText();
@@ -101,12 +105,12 @@ public class TypeRacerSystem : MonoBehaviour
         var currentData = coloredStringToRace.list[index];
         var startIndex = index;
 
-        if (currentData.c == ' ' || currentData.c == '\n')
+        if (currentData.c == ' ') // split words on spaces and ignore the space
         {
             wordCompletedCount++;
             if (wordCompletedCount % wordCountForPoints == 0)
             {
-                GameManager.Instance?.SendReward(GameType.Study, 1);
+                GameManager.Instance?.SendReward(GameType.Study, pointsPerWord);
             }
             index++;
             return;
@@ -124,17 +128,10 @@ public class TypeRacerSystem : MonoBehaviour
             index++;
             UpdateColoredText();
         }
-        else if (Input.anyKeyDown && startIndex == index)
+        else if (Input.anyKeyDown && startIndex == index && !Input.GetKeyDown(KeyCode.Space))
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-                return;
-
-            Debug.Log("fail");
-
             ShakeCamera();
         }
-
-        UpdateWPM();
     }
 
     void UpdateColoredText()
@@ -175,7 +172,7 @@ public class TypeRacerSystem : MonoBehaviour
     {
         if (shakeTimeRemaining < 0)
         {
-            shakeTarget.DOShakePosition(shakeDuration, new Vector3(20f, 20f, 0));
+            shakeTarget.DOShakePosition(shakeDuration, shakeStrength);
             shakeTimeRemaining = shakeDuration;
         }
     }

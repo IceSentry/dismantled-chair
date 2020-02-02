@@ -384,9 +384,11 @@ MonoBehaviour:
   textComponent: {fileID: 139114203}
   WPMText: {fileID: 267001851}
   wordCountForPoints: 1
+  pointsPerWord: 1
   useDebug: 0
   shakeTarget: {fileID: 1348319612}
   shakeDuration: 0.5
+  shakeStrength: {x: 20, y: 20, z: 0}
 --- !u!4 &333860989
 Transform:
   m_ObjectHideFlags: 0
