@@ -255,4 +255,4 @@ MonoBehaviour:
   shakeTarget: {fileID: 1238377124}
   shakeDuration: 0.1
   shakeStrength: {x: 0.15, y: 0.15, z: 0}
-  disableTime: 5
+  disableTime: 0.3
