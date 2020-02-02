@@ -9,12 +9,24 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Games/Sheep/SheepGame.unity
-    guid: 134ab6cafe89ac541944a692c35712ed
+    path: Assets/Games/Sheep/LEVEL 1.unity
+    guid: fab3227d92e0b2243aeae4293cb69bbf
   - enabled: 1
-    path: Assets/Games/Sheep/SheepGame2.unity
-    guid: 3a7de2e9fd6c5ce40b9208f9dd0bf253
+    path: Assets/Games/Sheep/LEVEL 2.unity
+    guid: 2358c2200c2ff6c4983172fbf006a326
   - enabled: 1
     path: Assets/Games/TypeRacer/TypeRacerScene.unity
     guid: aa37706c10118aa4a8a3cc1eb73194a1
+  - enabled: 1
+    path: Assets/Games/Sheep/LEVEL 3.unity
+    guid: dc7ec600598f4ae43963989a21e96210
+  - enabled: 1
+    path: Assets/Games/Sheep/LEVEL 4.unity
+    guid: 71bc51d0e85cdd8478dda8b706c0998c
+  - enabled: 1
+    path: Assets/Games/Sheep/LEVEL 5.unity
+    guid: 3eef7e15245806b4695613330503be63
+  - enabled: 1
+    path: Assets/Games/Sheep/LEVEL 6.unity
+    guid: b4d30b56a447efd498a17d091972cb1c
   m_configObjects: {}
