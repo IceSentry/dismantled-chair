@@ -900,7 +900,7 @@ MonoBehaviour:
       StudyTimer: 0
       SleepTimer: 0
   - Description: Drink to numb the pain!
-    EffectDescription: debt++ schoolwork++
+    EffectDescription: debt+ schoolwork+
     Visuals:
     - {fileID: 960465357}
     - {fileID: 1348134359}
@@ -919,7 +919,7 @@ MonoBehaviour:
       StudyTimer: 2
       SleepTimer: 0
   - Description: Crippling depression
-    EffectDescription: schoolwork++ fatigue++
+    EffectDescription: schoolwork+ fatigue+
     Visuals:
     - {fileID: 86380080}
     Debuffs: 0200000004000000
@@ -928,7 +928,7 @@ MonoBehaviour:
       StudyTimer: 1
       SleepTimer: 1
   - Description: Sickness
-    EffectDescription: fatigue++ debt++
+    EffectDescription: fatigue+ debt+
     Visuals:
     - {fileID: 580839925}
     - {fileID: 1919855801}
