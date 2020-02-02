@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class JoystickGame : MonoBehaviour
+public class PopupGame : MonoBehaviour
 {
     const string Button_A_string = "Button_A";
     const string Button_B_string = "Button_B";
@@ -12,11 +13,9 @@ public class JoystickGame : MonoBehaviour
 
     const int ButtonCount = 6;
 
-    const int MaxGameCount = 3;
+    const int SpriteCount = 5;
 
-    public float spriteOffset;
-    public GameObject buttonSpritePrefab;
-    public Sprite[] buttonSprites = new Sprite[ButtonCount];
+    const int MaxGameCount = 3;
 
     int Difficulty = 1;
 
@@ -32,28 +31,38 @@ public class JoystickGame : MonoBehaviour
         Right_Bumper
     }
 
+    public SpriteRenderer[] buttonSpawners;
+    public Sprite[] buttonIcons = new Sprite[ButtonCount];
     Queue<SequenceButtons> ButtonQueue = new Queue<SequenceButtons>();
     List<SpriteRenderer> ButtonSpriteList = new List<SpriteRenderer>();
+
     int SpriteListIndex = 0;
-    int InitSequenceLength = 5;
-    float SequeneLength = 0;
 
     // Start is called before the first frame update
     void Start()
     {
+        Shuffle(buttonSpawners);
+        AddButtons();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Test");
-        //while (GameCount < MaxGameCount)
-        //{
         PlaySequence();
-        //}
     }
 
-
+    public static void Shuffle<T>(T[] array)
+    {
+        int n = array.Length;
+        while (n > 1)
+        {
+            int k = Random.Range(0, n--);
+            T temp = array[n];
+            array[n] = array[k];
+            array[k] = temp;
+        }
+    }
     void PlaySequence()
     {
         if (ButtonQueue.Count == 0)
@@ -62,8 +71,8 @@ public class JoystickGame : MonoBehaviour
             {
                 Destroy(sprite.gameObject);
             }
-            GenerateSequence(this.InitSequenceLength * Difficulty);
             GameCount++;
+            AddButtons();
         }
 
 
@@ -83,6 +92,8 @@ public class JoystickGame : MonoBehaviour
             {
                 Debug.Log("Dequeued " + peeked);
                 ButtonQueue.Dequeue();
+                Debug.Log(SpriteListIndex);
+                Debug.Log(ButtonSpriteList.Count);
                 ButtonSpriteList[SpriteListIndex].color = new Color(ButtonSpriteList[SpriteListIndex].color.r / 2,
                                                                     ButtonSpriteList[SpriteListIndex].color.g / 2,
                                                                     ButtonSpriteList[SpriteListIndex].color.b / 2,
@@ -96,38 +107,17 @@ public class JoystickGame : MonoBehaviour
         }
     }
 
-    void GenerateSequence(int length)
+    void AddButtons()
     {
-        for (int i = 0; i < length; i++)
+        for (int i = 0; i < SpriteCount; i++)
         {
-            CreateButton();
-        }
-    }
+            SequenceButtons tmpButton = (SequenceButtons)Random.Range(0, ButtonCount);
+            ButtonQueue.Enqueue(tmpButton);
+            Sprite sprite = buttonIcons[(int)tmpButton];
+            buttonSpawners[i].GetComponent<SpriteRenderer>().sprite = sprite;
+            ButtonSpriteList.Add(buttonSpawners[i]);
+            buttonSpawners[i].enabled = true;
 
-    void CreateButton()
-    {
-        SequenceButtons tmpButton = (SequenceButtons)Random.Range(0, ButtonCount);
-        ButtonQueue.Enqueue(tmpButton);
-        Sprite sprite = buttonSprites[(int)tmpButton];
-        SequeneLength += GetSpriteOffset(tmpButton);
-
-        GameObject obj = Instantiate(buttonSpritePrefab, transform, false);
-        obj.transform.localPosition = new Vector3(SequeneLength, 0);
-        SpriteRenderer renderer = obj.GetComponent<SpriteRenderer>();
-        renderer.sprite = sprite;
-        ButtonSpriteList.Add(renderer);
-        SequeneLength += GetSpriteOffset(tmpButton);
-    }
-
-    float GetSpriteOffset(SequenceButtons button)
-    {
-        switch (button)
-        {
-            case SequenceButtons.Left_Bumper:
-            case SequenceButtons.Right_Bumper:
-                return 0.5f;
-            default:
-                return 0.25f;
         }
     }
 }
