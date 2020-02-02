@@ -37,12 +37,14 @@ public class GameManager : MonoBehaviour
     public GameConfig gameConfig;
 
     [Header("UI")]
+
     public RectTransform rightPanel;
     public RectTransform leftPanel;
     public RectTransform titleText;
-    public Text leftText;
-    public GameObject leftButtonsGroup;
     public float UIAnimationSpeed;
+    public GameObject introGroup;
+    public GameObject gameOverGroup;
+    public GameObject victoryGroup;
 
     GameConfig debuffEvent;
     GameType currentType;
@@ -126,6 +128,8 @@ public class GameManager : MonoBehaviour
         leftPanel.DOAnchorPos3DX(-600, UIAnimationSpeed);
         yield return new WaitForSeconds(UIAnimationSpeed);
 
+        introGroup.SetActive(false);
+
         gameState = GameState.During;
         eventManager.enabled = true;
         for (int i = 0; i < sliders.Length; i++)
@@ -187,7 +191,19 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Finish");
         gameState = GameState.EndGame;
+        StartCoroutine(ShowVictoryPanel());
+    }
+
+    IEnumerator ShowVictoryPanel()
+    {
+        victoryGroup.SetActive(true);
+        leftPanel.DOAnchorPos3DX(600, UIAnimationSpeed);
+
+        yield return new WaitForSeconds(UIAnimationSpeed);
+
         DisableGameplay();
+
+        StartCoroutine(WaitForRestart());
     }
 
     void GameOver()
@@ -207,7 +223,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator ShowGameOverPanel()
     {
-        leftText.text = "Game Over! Press any key to restart";
+        gameOverGroup.SetActive(true);
         leftPanel.DOAnchorPos3DX(600, UIAnimationSpeed);
 
         yield return new WaitForSeconds(UIAnimationSpeed);
