@@ -20,4 +20,6 @@ public struct GameConfig
 
         throw new System.ArgumentException($"GameType: {type} is not valid.");
     }
+
+
 }

@@ -882,44 +882,61 @@ MonoBehaviour:
   warningEvent: {fileID: 2111099811}
   warningTitle: {fileID: 1894055579}
   warningEffect: {fileID: 640400682}
+  debuffRenderers:
+  - debuff: {fileID: 1464066726064245084}
+    bigDebuff: {fileID: 1464066726064245083}
+  - debuff: {fileID: 1464066726064245082}
+    bigDebuff: {fileID: 1464066726064245081}
+  - debuff: {fileID: 1464066726064245080}
+    bigDebuff: {fileID: 1464066726064245079}
   gameEvents:
   - Description: Loan interest rate up!
+    EffectDescription: debt++
     Visuals:
     - {fileID: 1165977585}
+    Debuffs: 01000000
     Config:
-      WorkTimer: 0.2
+      WorkTimer: 2
       StudyTimer: 0
       SleepTimer: 0
   - Description: Drink to numb the pain!
+    EffectDescription: debt++ schoolwork++
     Visuals:
     - {fileID: 960465357}
     - {fileID: 1348134359}
+    Debuffs: 0000000002000000
     Config:
-      WorkTimer: 0.1
-      StudyTimer: 0.1
+      WorkTimer: 1
+      StudyTimer: 1
       SleepTimer: 0
   - Description: Finals!
+    EffectDescription: schoolwork++
     Visuals:
     - {fileID: 2039722689}
+    Debuffs: 03000000
     Config:
       WorkTimer: 0
-      StudyTimer: 0.2
+      StudyTimer: 2
       SleepTimer: 0
   - Description: Crippling depression
+    EffectDescription: schoolwork++ fatigue++
     Visuals:
     - {fileID: 86380080}
+    Debuffs: 0200000004000000
     Config:
       WorkTimer: 0
-      StudyTimer: 0.1
-      SleepTimer: 0.1
+      StudyTimer: 1
+      SleepTimer: 1
   - Description: Sickness
+    EffectDescription: fatigue++ debt++
     Visuals:
     - {fileID: 580839925}
     - {fileID: 1919855801}
+    Debuffs: 0000000004000000
     Config:
-      WorkTimer: 0.1
+      WorkTimer: 1
       StudyTimer: 0
-      SleepTimer: 0.1
+      SleepTimer: 1
 --- !u!1 &640400680
 GameObject:
   m_ObjectHideFlags: 0
@@ -1708,32 +1725,13 @@ MonoBehaviour:
   - {fileID: 126536318}
   - {fileID: 145889297}
   globalSpeed: 1
+  workScene: 1
+  studyScene: 2
+  sleepScenes: 03000000040000000500000006000000070000000800000009000000
   gameConfig:
     WorkTimer: 5
     StudyTimer: 5
     SleepTimer: 5
-  scenes:
-  - scene: 1
-    game: 2
-  - scene: 2
-    game: 2
-  - scene: 3
-    game: 1
-  - scene: 4
-    game: 2
-  - scene: 5
-    game: 2
-  - scene: 6
-    game: 2
-  - scene: 7
-    game: 2
-  - scene: 8
-    game: 2
-  - scene: 9
-    game: 0
-  workScene: 1
-  studyScene: 2
-  sleepScenes: 03000000040000000500000006000000070000000800000009000000
   rightPanel: {fileID: 2081215392}
   titleText: {fileID: 1661717492}
 --- !u!4 &1363217901
@@ -2765,3 +2763,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2287ed8c315737d4d8ed6ead28b6fbbc, type: 3}
+--- !u!1 &1464066726064245079 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5150141993169517764, guid: 2287ed8c315737d4d8ed6ead28b6fbbc,
+    type: 3}
+  m_PrefabInstance: {fileID: 1464066726064245078}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1464066726064245080 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6815145864126772495, guid: 2287ed8c315737d4d8ed6ead28b6fbbc,
+    type: 3}
+  m_PrefabInstance: {fileID: 1464066726064245078}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1464066726064245081 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4652802848991985328, guid: 2287ed8c315737d4d8ed6ead28b6fbbc,
+    type: 3}
+  m_PrefabInstance: {fileID: 1464066726064245078}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1464066726064245082 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2927632770444341317, guid: 2287ed8c315737d4d8ed6ead28b6fbbc,
+    type: 3}
+  m_PrefabInstance: {fileID: 1464066726064245078}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1464066726064245083 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6024494623051741932, guid: 2287ed8c315737d4d8ed6ead28b6fbbc,
+    type: 3}
+  m_PrefabInstance: {fileID: 1464066726064245078}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1464066726064245084 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 510325289799866404, guid: 2287ed8c315737d4d8ed6ead28b6fbbc,
+    type: 3}
+  m_PrefabInstance: {fileID: 1464066726064245078}
+  m_PrefabAsset: {fileID: 0}
