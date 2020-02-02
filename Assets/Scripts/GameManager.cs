@@ -207,13 +207,21 @@ public class GameManager : MonoBehaviour
 
     IEnumerator ShowGameOverPanel()
     {
-        leftText.text = "game over";
-        leftButtonsGroup.SetActive(false);
+        leftText.text = "Game Over! Press any key to restart";
         leftPanel.DOAnchorPos3DX(600, UIAnimationSpeed);
 
         yield return new WaitForSeconds(UIAnimationSpeed);
 
         DisableGameplay();
+
+        StartCoroutine(WaitForRestart());
+    }
+
+    IEnumerator WaitForRestart()
+    {
+        yield return new WaitUntil(() => Input.anyKey);
+
+        SceneManager.LoadScene(0);
     }
 
     void EnterGame(GameType type)
