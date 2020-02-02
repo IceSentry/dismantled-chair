@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PopupGame : MonoBehaviour
 {
@@ -28,6 +29,10 @@ public class PopupGame : MonoBehaviour
     public SpriteRenderer workLevelBG;
     public SpriteRenderer[] buttonSpawners;
     public Sprite[] buttonIcons = new Sprite[ButtonCount];
+    public float breathingScalingX;
+    public float breathingScalingY;
+    public float breathingDuration;
+
     Queue<ButtonType> ButtonQueue = new Queue<ButtonType>();
     List<SpriteRenderer> ButtonSpriteList = new List<SpriteRenderer>();
 
@@ -39,6 +44,7 @@ public class PopupGame : MonoBehaviour
         //Shuffle(buttonSpawners);
         GenerateButtonSequence();
         ButtonSpriteList[SpriteListIndex].enabled = true;
+        ButtonSpriteList[SpriteListIndex].transform.DOPunchScale(new Vector3(breathingScalingX, breathingScalingY), breathingDuration);
 
     }
 
@@ -76,6 +82,7 @@ public class PopupGame : MonoBehaviour
                                                                     ButtonSpriteList[SpriteListIndex].color.b / 2,
                                                                     ButtonSpriteList[SpriteListIndex].color.a / 2);
                 ButtonSpriteList[++SpriteListIndex].enabled = true;
+                ButtonSpriteList[SpriteListIndex].transform.DOPunchScale(new Vector3(breathingScalingX, breathingScalingY), breathingDuration);
             }
             else if (buttonMask != 0)
             {
@@ -97,5 +104,12 @@ public class PopupGame : MonoBehaviour
             ButtonSpriteList.Add(buttonSpanwer);
 
         }
+    }
+    void Breathing(SpriteRenderer buttonSpriteRenderer)
+    {
+        while (buttonSpriteRenderer.enabled) {
+            
+        }
+
     }
 }
