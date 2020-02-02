@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour
     public void EndGame(GameType type, int reward)
     {
         SendReward(type, reward);
-        LoadGame(currentType);
+        LoadGame(type);
     }
 
     void LoadGame(GameType type)

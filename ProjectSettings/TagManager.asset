@@ -16,7 +16,7 @@ TagManager:
   - 
   - 
   - Terrain
-  - 
+  - World
   - 
   - 
   - 
@@ -40,6 +40,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 3927109677
+    locked: 0
   - name: Ground
     uniqueID: 183209907
     locked: 0
