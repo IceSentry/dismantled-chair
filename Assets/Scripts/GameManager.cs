@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     [Header("GameObject")]
     public Slider[] sliders;
     public EventManager eventManager;
+    public GameObject[] visualGameStates;
 
     [Header("Data")]
     public float globalSpeed = 1f;
@@ -126,7 +127,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         gameState = GameState.During;
-        eventManager.gameObject.SetActive(true);
+        eventManager.enabled = true;
     }
 
     void DuringPlay()
@@ -151,17 +152,17 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetButtonDown("Button_A"))
         {
-            LoadGame(GameType.Work);
+            EnterGame(GameType.Work);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        else if (Input.GetKeyDown(KeyCode.Return))
         {
-            LoadGame(GameType.Study);
+            EnterGame(GameType.Study);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        else if (Input.GetMouseButtonDown(0))
         {
-            LoadGame(GameType.Sleep);
+            EnterGame(GameType.Sleep);
         }
     }
 
@@ -175,15 +176,34 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void EnterGame(GameType type)
+    {
+        if (type == currentType && currentScene > 0)
+            return;
+
+        LoadGame(type);
+    }
+
     void LoadGame(GameType type)
     {
         UnloadCurrentScene();
+
+        if (visualGameStates[(int)currentType] != null)
+        {
+            visualGameStates[(int)currentType].SetActive(false);
+        }
+
+        if (visualGameStates[(int)type] != null)
+        {
+            visualGameStates[(int)type].SetActive(true);
+        }
 
         currentType = type;
         int scene = GetRandomGame(type);
         if (scene > 0)
         {
             LoadTargetScene(scene);
+
         }
     }
 
