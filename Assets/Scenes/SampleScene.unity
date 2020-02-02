@@ -1763,7 +1763,7 @@ MonoBehaviour:
   titleText: {fileID: 1661717492}
   leftText: {fileID: 280898590}
   leftButtonsGroup: {fileID: 59907033}
-  UIAnimationSpeed: 0
+  UIAnimationSpeed: 0.5
 --- !u!4 &1363217901
 Transform:
   m_ObjectHideFlags: 0
@@ -2976,66 +2976,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 484028205}
     m_Modifications:
-    - target: {fileID: 1512210706480245361, guid: a59c085cdc1b3c84ab065dcb5b47983a,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1512210706480245361, guid: a59c085cdc1b3c84ab065dcb5b47983a,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1512210706480245361, guid: a59c085cdc1b3c84ab065dcb5b47983a,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1512210706480245361, guid: a59c085cdc1b3c84ab065dcb5b47983a,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1512210707240423144, guid: a59c085cdc1b3c84ab065dcb5b47983a,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1512210707240423144, guid: a59c085cdc1b3c84ab065dcb5b47983a,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1512210707240423144, guid: a59c085cdc1b3c84ab065dcb5b47983a,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1512210707240423144, guid: a59c085cdc1b3c84ab065dcb5b47983a,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1512210707395617332, guid: a59c085cdc1b3c84ab065dcb5b47983a,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1512210707395617332, guid: a59c085cdc1b3c84ab065dcb5b47983a,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1512210707395617332, guid: a59c085cdc1b3c84ab065dcb5b47983a,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1512210707395617332, guid: a59c085cdc1b3c84ab065dcb5b47983a,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1512210707606420729, guid: a59c085cdc1b3c84ab065dcb5b47983a,
         type: 3}
       propertyPath: m_Name
