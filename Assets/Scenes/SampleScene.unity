@@ -1724,6 +1724,7 @@ MonoBehaviour:
   - {fileID: 1356750210}
   - {fileID: 126536318}
   - {fileID: 145889297}
+  endGameTime: 120
   globalSpeed: 1
   workScene: 1
   studyScene: 2

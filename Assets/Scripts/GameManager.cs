@@ -16,7 +16,7 @@ public enum GameState
 {
     Start,
     During,
-    GameOver
+    EndGame
 }
 
 public class GameManager : MonoBehaviour
@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] visualGameStates;
 
     [Header("Data")]
+    public float endGameTime = 120f;
     public float globalSpeed = 1f;
     public int workScene;
     public int studyScene;
@@ -45,6 +46,7 @@ public class GameManager : MonoBehaviour
     int currentScene = -1;
     int currentSleepScene = 0;
 
+    float endGameTimer;
     float[] gameTimers;
 
     private void Awake()
@@ -64,7 +66,7 @@ public class GameManager : MonoBehaviour
             case GameState.During:
                 DuringPlay();
                 break;
-            case GameState.GameOver:
+            case GameState.EndGame:
                 break;
         }   
     }
@@ -116,6 +118,13 @@ public class GameManager : MonoBehaviour
 
     void DuringPlay()
     {
+        endGameTimer += Time.deltaTime;
+        if (endGameTimer >= endGameTime)
+        {
+            Finish();
+            return;
+        }
+
         for (int i = 0; i < gameTimers.Length; i++)
         {
             GameType gameType = (GameType)i;
@@ -151,16 +160,27 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void Finish()
+    {
+        Debug.Log("Finish");
+        DisableGameplay();
+    }
+
     void GameOver()
     {
-        if (gameState != GameState.GameOver)
+        if (gameState != GameState.EndGame)
         {
             Debug.Log("GameOver");
-            UnloadCurrentScene();
-            gameState = GameState.GameOver;
-
-            eventManager.enabled = false;
+            DisableGameplay();
         }
+    }
+
+    void DisableGameplay()
+    {
+        UnloadCurrentScene();
+        gameState = GameState.EndGame;
+
+        eventManager.enabled = false;
     }
 
     void EnterGame(GameType type)
