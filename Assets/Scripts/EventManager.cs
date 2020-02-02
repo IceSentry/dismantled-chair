@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class EventManager : MonoBehaviour
 {
-    public Text eventText;
+    public TextMeshProUGUI eventText;
 
     float timer = 0;
     float spawnTime = 45f;

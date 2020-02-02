@@ -36,7 +36,8 @@ public class GameManager : MonoBehaviour
     public Slider[] sliders;
 
     [Header("Data")]
-    public GameConfig[] gameConfigs;
+    public float globalSpeed = 0.1f;
+    public GameConfig gameConfig;
     public PairGameTypeSceneIndex[] scenes;
 
     [Header("UI")]
@@ -93,7 +94,7 @@ public class GameManager : MonoBehaviour
 
     public void SendReward(GameType type, int reward)
     {
-        sliders[(int)type].value -= reward;
+        sliders[(int)type].value += reward;
     }
 
     public void EndGame(GameType type, int reward)
@@ -121,17 +122,17 @@ public class GameManager : MonoBehaviour
 
     void DuringPlay()
     {
-        GameConfig config = gameConfigs[difficulty];
+
         for (int i = 0; i < gameTimers.Length; i++)
         {
-            float timer = config.GetTimer((GameType)i);
-            gameTimers[i] += Time.deltaTime * config.GlobalSpeed;
+            gameTimers[i] += Time.deltaTime * globalSpeed;
+            float timer = gameConfig.GetTimer((GameType)i);
             if (gameTimers[i] >= timer)
             {
                 var slider = sliders[i];
                 if (slider.value < slider.maxValue)
                 {
-                    slider.value += 1;
+                    slider.value -= 1;
                 }
                 else
                 {
