@@ -231,7 +231,7 @@ public class GameManager : MonoBehaviour
         if (eventManager.index > 0)
         {
             var text = "You failed at fixing you life because:\n";
-            for (int i = 0; i <= eventManager.index; i++)
+            for (int i = 0; i < eventManager.index; i++)
             {
                 text += $" - {eventManager.gameEvents[i].EndStatusDesc}\n";
             }
