@@ -1731,6 +1731,9 @@ MonoBehaviour:
     game: 2
   - scene: 9
     game: 0
+  workScene: 1
+  studyScene: 2
+  sleepScenes: 03000000040000000500000006000000070000000800000009000000
   rightPanel: {fileID: 2081215392}
   titleText: {fileID: 1661717492}
 --- !u!4 &1363217901
