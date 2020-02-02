@@ -528,7 +528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbaaa16f5284e474fbb9ef8f326023df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 25
   distance: 1
   activeIndicator: {fileID: 846116871}
   bodiesPart:
