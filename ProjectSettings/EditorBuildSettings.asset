@@ -9,14 +9,17 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
+    path: Assets/Games/WorkGame/WorkGameScene.unity
+    guid: bee363a52d68f44489c35d192db1d017
+  - enabled: 1
+    path: Assets/Games/TypeRacer/TypeRacerScene.unity
+    guid: aa37706c10118aa4a8a3cc1eb73194a1
+  - enabled: 1
     path: Assets/Games/Sheep/LVL1.unity
     guid: 242235728d3a1094b861439361efef5e
   - enabled: 1
     path: Assets/Games/Sheep/LVL2.unity
     guid: 2f16636241a3a2049a0fbe466566f11e
-  - enabled: 1
-    path: Assets/Games/TypeRacer/TypeRacerScene.unity
-    guid: aa37706c10118aa4a8a3cc1eb73194a1
   - enabled: 1
     path: Assets/Games/Sheep/LVL3.unity
     guid: ee3d0e5163aafdd4db046f551b107b34
@@ -32,7 +35,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Games/Sheep/LVL7.unity
     guid: bfd697cfe5aa3d240a7ea474e884d637
-  - enabled: 1
-    path: Assets/Games/WorkGame/WorkGameScene.unity
-    guid: bee363a52d68f44489c35d192db1d017
   m_configObjects: {}

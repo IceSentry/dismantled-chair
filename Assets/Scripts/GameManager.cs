@@ -19,17 +19,8 @@ public enum GameState
     GameOver
 }
 
-[System.Serializable]
-public class PairGameTypeSceneIndex
-{
-    public int scene;
-    public GameType game;
-}
-
 public class GameManager : MonoBehaviour
 {
-    const int GAMETYPE_COUNT = 3;
-
     public static GameManager Instance { get; private set; }
 
     [Header("GameObject")]
@@ -40,42 +31,25 @@ public class GameManager : MonoBehaviour
     [Header("Data")]
     public float globalSpeed = 1f;
     public GameConfig gameConfig;
-    public PairGameTypeSceneIndex[] scenes;
+    public int workScene;
+    public int studyScene;
+    public int[] sleepScenes;
 
     [Header("UI")]
     public RectTransform rightPanel;
     public RectTransform titleText;
 
-    GameType game;
-    List<int>[] gameLists;
-    int difficulty;
-
-    GameState gameState;
     GameType currentType;
+    GameState gameState = GameState.Start;
     int currentScene = -1;
+    int currentSleepScene = 0;
 
     float[] gameTimers;
 
     private void Awake()
     {
         Instance = this;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        gameState = GameState.Start;
-
-        gameTimers = new float[GAMETYPE_COUNT];
-        gameLists = new List<int>[GAMETYPE_COUNT];
-        for (int i = 0; i < GAMETYPE_COUNT; i++)
-            gameLists[i] = new List<int>();
-
-        for (int i = 0; i < scenes.Length; i++)
-        {
-            int type = (int)scenes[i].game;
-            gameLists[type].Add(scenes[i].scene);
-        }
+        gameTimers = new float[] { 0, 0, 0 };
     }
 
     // Update is called once per frame
@@ -108,6 +82,13 @@ public class GameManager : MonoBehaviour
 
     public void EndGame(GameType type, int reward)
     {
+        if (type == GameType.Sleep)
+        {
+            currentSleepScene++;
+            if (currentSleepScene >= sleepScenes.Length)
+                currentSleepScene = 0;
+        }
+
         SendReward(type, reward);
         LoadGame(type);
     }
@@ -177,6 +158,8 @@ public class GameManager : MonoBehaviour
             Debug.Log("GameOver");
             UnloadCurrentScene();
             gameState = GameState.GameOver;
+
+            eventManager.enabled = false;
         }
     }
 
@@ -203,7 +186,7 @@ public class GameManager : MonoBehaviour
         }
 
         currentType = type;
-        int scene = GetRandomGame(type);
+        int scene = GetGameScene(type);
         if (scene > 0)
         {
             LoadTargetScene(scene);
@@ -215,7 +198,6 @@ public class GameManager : MonoBehaviour
     {
         currentScene = scene;
         SceneManager.LoadScene(scene, LoadSceneMode.Additive);
-        //SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(scene));
     }
 
     void UnloadCurrentScene()
@@ -226,13 +208,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    int GetRandomGame(GameType type)
+    int GetGameScene(GameType type)
     {
-        var list = gameLists[(int)type];
-        if(list.Count > 0)
-            return list[Random.Range(0, list.Count)];
+        switch (type)
+        {
+            case GameType.Work: return workScene;
+            case GameType.Study: return studyScene;
+        }
 
-        return -1;
+        return sleepScenes[currentSleepScene];
     }
 }
 
