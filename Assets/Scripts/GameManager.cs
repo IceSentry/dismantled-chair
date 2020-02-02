@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
     public GameObject introGroup;
     public GameObject gameOverGroup;
     public GameObject victoryGroup;
+    public Text gameOverStatusText;
 
     GameConfig debuffEvent;
     GameType currentType;
