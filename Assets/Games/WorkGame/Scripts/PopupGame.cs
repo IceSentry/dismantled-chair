@@ -107,6 +107,11 @@ public class PopupGame : MonoBehaviour
             else if (buttonMask != 0)
             {
                 PopupGameManager.Instance.ShakeCamera();
+                if (!isDisabled)
+                {
+                    isDisabled = true;
+                    StartCoroutine(TimeoutCoroutine());
+                }
             }
         }
     }
@@ -123,5 +128,11 @@ public class PopupGame : MonoBehaviour
             ButtonSpriteList.Add(buttonSpanwer);
 
         }
+    }
+    IEnumerator TimeoutCoroutine()
+    {
+        //yield on a new YieldInstruction that waits for 5 seconds.
+        yield return new WaitForSeconds(PopupGameManager.Instance.disableTime);
+        isDisabled = false;
     }
 }
