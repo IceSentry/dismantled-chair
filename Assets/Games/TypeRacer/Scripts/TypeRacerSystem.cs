@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.TypeRacer;
+using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +10,8 @@ public class TypeRacerSystem : MonoBehaviour
     public Text WPMText;
     public int wordCountForPoints;
     public bool useDebug;
+    public Transform shakeTarget;
+    public float shakeDuration;
 
     private List<string> dictionary = new List<string>() {
         "Gender is pertinent to many disciplines, such as literary theory, drama studies, " +
@@ -35,9 +38,9 @@ public class TypeRacerSystem : MonoBehaviour
         "game playing. As computer and video games have increased in popularity over time, they " +
         "have had a significant influence on popular culture.",
 
-        "But first, we need to talk about parallel universes. Now, you are probably what I am going " +
-        "to need all this speed for. After all, I do build up speed for 12 hours. But to answer that, " +
-        "we need to talk about parallel universes. And if you thought my other tangents were complicated, just you wait.",
+        "But first, we need to talk about parallel universes. Now, you are probably wondering what I am going " +
+        "to need all this speed for. After all, I do build up speed for twelve hours. " +
+        "And if you thought my other tangents were complicated, just you wait.",
 
         "History also includes the academic discipline which uses a narrative to examine and analyse a sequence " +
         "of past events, and objectively determine the patterns of cause and effect that determine them.",
@@ -52,9 +55,12 @@ public class TypeRacerSystem : MonoBehaviour
         "sitll raed it wouthit porbelm. Tihs is bcuseae the huamn mnid deos not raed ervey lteter by istlef, " +
         "but the wrod as a wlohe.",
 
-        "Is this the real life\nIs this just fantasy\nCaught in a landslide,\nNo escape from reality.\n" + 
-        "Open your eyes,\nLook up to the skies and see,\nI m just a poor boy, I need no sympathy,\n" +
-        "Because I'm easy come, easy go,\nLittle high, little low,"
+        "Is this the real life. Is this just fantasy. Caught in a landslide, No escape from reality. " +
+        "Open your eyes, Look up to the skies and see, I m just a poor boy, I need no sympathy, " +
+        "Because I'm easy come, easy go, Little high, little low,",
+
+        "Somebody once told me the world is gonna roll me. I aint the sharpest tool in the shed." +
+        "She was looking kind of dumb with her finger and her thumb. In the shape of an L on her forehead"
     };
 
     private ColoredText coloredStringToRace;
@@ -62,7 +68,8 @@ public class TypeRacerSystem : MonoBehaviour
     private int index;
     private int wordCompletedCount;
     private float time;
-
+    private float shakeTimeRemaining;
+    
     private List<string> debugDictionary = new List<string>()
     {
         "A B.",
@@ -83,6 +90,7 @@ public class TypeRacerSystem : MonoBehaviour
 
     void Update()
     {
+        shakeTimeRemaining -= Time.deltaTime;
         time += Time.deltaTime;
         if (index >= coloredStringToRace.list.Count)
         {
@@ -121,8 +129,9 @@ public class TypeRacerSystem : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
                 return;
 
-            //coloredStringToRace.SetColorAt(index, TextColor.FAILURE);
-            //UpdateColoredText();
+            Debug.Log("fail");
+
+            ShakeCamera();
         }
 
         UpdateWPM();
@@ -160,5 +169,14 @@ public class TypeRacerSystem : MonoBehaviour
         coloredStringToRace = GetNextColoredText();
         index = 0;
         UpdateColoredText();
+    }
+
+    void ShakeCamera()
+    {
+        if (shakeTimeRemaining < 0)
+        {
+            shakeTarget.DOShakePosition(shakeDuration, new Vector3(20f, 20f, 0));
+            shakeTimeRemaining = shakeDuration;
+        }
     }
 }
