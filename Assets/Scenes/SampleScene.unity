@@ -968,7 +968,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0df1e217b7159f42870bc39c5b7e965, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnTime: 3
+  spawnTime: 15
   panelEventText: {fileID: 1984524476}
   warningEvent: {fileID: 2111099811}
   warningTitle: {fileID: 1894055579}
