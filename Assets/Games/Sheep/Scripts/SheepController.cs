@@ -60,6 +60,6 @@ public class SheepController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        GameManager.Instance.EndGame(GameType.Sleep, 1);
+        GameManager.Instance.EndGame(GameType.Sleep, 3);
     }
 }

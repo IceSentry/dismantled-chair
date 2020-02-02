@@ -1709,9 +1709,9 @@ MonoBehaviour:
   - {fileID: 145889297}
   globalSpeed: 1
   gameConfig:
-    WorkTimer: 3
-    StudyTimer: 3
-    SleepTimer: 3
+    WorkTimer: 5
+    StudyTimer: 5
+    SleepTimer: 5
   scenes:
   - scene: 1
     game: 2
@@ -1731,6 +1731,9 @@ MonoBehaviour:
     game: 2
   - scene: 9
     game: 0
+  workScene: 1
+  studyScene: 2
+  sleepScenes: 03000000040000000500000006000000070000000800000009000000
   rightPanel: {fileID: 2081215392}
   titleText: {fileID: 1661717492}
 --- !u!4 &1363217901
@@ -2144,7 +2147,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Loan interest rate up!
+  m_text: Drink to numb the pain!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8a1811f3625efac4f8943b02ffa3c56e, type: 2}
   m_sharedMaterial: {fileID: -3328938397745308977, guid: 8a1811f3625efac4f8943b02ffa3c56e,
@@ -2214,10 +2217,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: -3.5615492, z: 2.0385456, w: 0}
   m_textInfo:
     textComponent: {fileID: 1894055579}
-    characterCount: 22
+    characterCount: 23
     spriteCount: 0
-    spaceCount: 3
-    wordCount: 4
+    spaceCount: 4
+    wordCount: 5
     linkCount: 0
     lineCount: 1
     pageCount: 1
