@@ -126,7 +126,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         gameState = GameState.During;
-        eventManager.gameObject.SetActive(true);
+        eventManager.enabled = true;
     }
 
     void DuringPlay()

@@ -131,7 +131,7 @@ GameObject:
   m_Component:
   - component: {fileID: 86380081}
   - component: {fileID: 86380082}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: POSTER
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -644,7 +644,7 @@ GameObject:
   m_Component:
   - component: {fileID: 580839926}
   - component: {fileID: 580839927}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MEDS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -809,6 +809,7 @@ MonoBehaviour:
       WorkTimer: 0.1
       StudyTimer: 0
       SleepTimer: 0.1
+  spawnTime: 10
 --- !u!114 &701342121 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1464066725405976831, guid: 2287ed8c315737d4d8ed6ead28b6fbbc,
@@ -831,7 +832,7 @@ GameObject:
   m_Component:
   - component: {fileID: 960465358}
   - component: {fileID: 960465359}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BEERBILL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1067,7 +1068,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1165977586}
   - component: {fileID: 1165977587}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LOAN
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1148,7 +1149,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1348134360}
   - component: {fileID: 1348134361}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BEER_BOTTLES
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1583,7 +1584,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1919855802}
   - component: {fileID: 1919855803}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MEDBILL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1757,7 +1758,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2039722690}
   - component: {fileID: 2039722691}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BOOKS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
