@@ -172,7 +172,7 @@ public class TypeRacerSystem : MonoBehaviour
     {
         if (shakeTimeRemaining < 0)
         {
-            shakeTarget.DOShakePosition(shakeDuration, shakeStrength);
+            shakeTarget.DOShakePosition(shakeDuration, shakeStrength, 20, 200f);
             shakeTimeRemaining = shakeDuration;
         }
     }
