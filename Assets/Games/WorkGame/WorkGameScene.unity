@@ -121,59 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &96091553
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 96091555}
-  - component: {fileID: 96091554}
-  m_Layer: 0
-  m_Name: GameSequence
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &96091554
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 96091553}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49e51a20b7a7e1c47bebee8f4fabfe8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spriteOffset: 1
-  buttonSpritePrefab: {fileID: 8641331635792625045, guid: 0eb36b8c02b78d345a6ac6a88b8fb38a,
-    type: 3}
-  buttonSprites:
-  - {fileID: -8191739510646017925, guid: a1178578399e9704fbf5910c8e61c850, type: 3}
-  - {fileID: 8359661988393023892, guid: a1178578399e9704fbf5910c8e61c850, type: 3}
-  - {fileID: 5830344958925785552, guid: a1178578399e9704fbf5910c8e61c850, type: 3}
-  - {fileID: -7138311499508957143, guid: a1178578399e9704fbf5910c8e61c850, type: 3}
-  - {fileID: 650656284835190746, guid: a1178578399e9704fbf5910c8e61c850, type: 3}
-  - {fileID: -9124727645642988533, guid: a1178578399e9704fbf5910c8e61c850, type: 3}
---- !u!4 &96091555
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 96091553}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &202860180
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -769,7 +716,7 @@ Transform:
   m_LocalScale: {x: 8.606415, y: 8.606415, z: 8.606415}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &580112500
 GameObject:
@@ -820,7 +767,7 @@ Transform:
   - {fileID: 292729870}
   - {fileID: 1673145799}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &580112502
 MonoBehaviour:
@@ -834,7 +781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 918cdd3d3ca2f5745893de332b48d242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonSprites:
+  buttonSpawners:
   - {fileID: 204858879}
   - {fileID: 2019072077}
   - {fileID: 1755759811}
@@ -855,6 +802,13 @@ MonoBehaviour:
   - {fileID: 2084753123}
   - {fileID: 292729871}
   - {fileID: 1673145800}
+  buttonIcons:
+  - {fileID: -8191739510646017925, guid: a1178578399e9704fbf5910c8e61c850, type: 3}
+  - {fileID: 8359661988393023892, guid: a1178578399e9704fbf5910c8e61c850, type: 3}
+  - {fileID: 5830344958925785552, guid: a1178578399e9704fbf5910c8e61c850, type: 3}
+  - {fileID: -7138311499508957143, guid: a1178578399e9704fbf5910c8e61c850, type: 3}
+  - {fileID: 650656284835190746, guid: a1178578399e9704fbf5910c8e61c850, type: 3}
+  - {fileID: -9124727645642988533, guid: a1178578399e9704fbf5910c8e61c850, type: 3}
 --- !u!1001 &687903250
 PrefabInstance:
   m_ObjectHideFlags: 0

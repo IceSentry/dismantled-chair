@@ -31,7 +31,8 @@ public class PopupGame : MonoBehaviour
         Right_Bumper
     }
 
-    public SpriteRenderer[] buttonSprites;
+    public SpriteRenderer[] buttonSpawners;
+    public Sprite[] buttonIcons = new Sprite[ButtonCount];
     Queue<SequenceButtons> ButtonQueue = new Queue<SequenceButtons>();
     List<SpriteRenderer> ButtonSpriteList = new List<SpriteRenderer>();
 
@@ -40,7 +41,7 @@ public class PopupGame : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Shuffle(buttonSprites);
+        Shuffle(buttonSpawners);
         AddButtons();
 
     }
@@ -48,9 +49,7 @@ public class PopupGame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //while (GameCount < MaxGameCount) {
-            PlaySequence();
-        //}
+        PlaySequence();
     }
 
     public static void Shuffle<T>(T[] array)
@@ -58,7 +57,7 @@ public class PopupGame : MonoBehaviour
         int n = array.Length;
         while (n > 1)
         {
-            int k = Random.Range(0,n--);
+            int k = Random.Range(0, n--);
             T temp = array[n];
             array[n] = array[k];
             array[k] = temp;
@@ -93,6 +92,8 @@ public class PopupGame : MonoBehaviour
             {
                 Debug.Log("Dequeued " + peeked);
                 ButtonQueue.Dequeue();
+                Debug.Log(SpriteListIndex);
+                Debug.Log(ButtonSpriteList.Count);
                 ButtonSpriteList[SpriteListIndex].color = new Color(ButtonSpriteList[SpriteListIndex].color.r / 2,
                                                                     ButtonSpriteList[SpriteListIndex].color.g / 2,
                                                                     ButtonSpriteList[SpriteListIndex].color.b / 2,
@@ -106,16 +107,16 @@ public class PopupGame : MonoBehaviour
         }
     }
 
-    void AddButtons() {
+    void AddButtons()
+    {
         for (int i = 0; i < SpriteCount; i++)
         {
             SequenceButtons tmpButton = (SequenceButtons)Random.Range(0, ButtonCount);
             ButtonQueue.Enqueue(tmpButton);
-            Sprite sprite = buttonSprites[(int)tmpButton];
-            GetComponent<Renderer>().sprite = sprite;
-            ButtonSpriteList.Add(GetComponent<Renderer>());
-            //buttonSprites[]
-            //buttonSprites[i].enabled = true;
+            Sprite sprite = buttonIcons[(int)tmpButton];
+            buttonSpawners[i].GetComponent<SpriteRenderer>().sprite = sprite;
+            ButtonSpriteList.Add(buttonSpawners[i]);
+            buttonSpawners[i].enabled = true;
 
         }
     }

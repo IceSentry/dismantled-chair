@@ -35,7 +35,7 @@ public class TypeRacerSystem : MonoBehaviour
         "game playing. As computer and video games have increased in popularity over time, they " +
         "have had a significant influence on popular culture.",
 
-        "But first, we need to talk about parallel universes. Now, you are probably what I'm going " +
+        "But first, we need to talk about parallel universes. Now, you are probably what I am going " +
         "to need all this speed for. After all, I do build up speed for 12 hours. But to answer that, " +
         "we need to talk about parallel universes. And if you thought my other tangents were complicated, just you wait.",
 
@@ -50,7 +50,11 @@ public class TypeRacerSystem : MonoBehaviour
         "It deos not mttaer in waht oredr the ltteers in a wrod are, the olny iprmoetnt tihng is " +
         "taht the frist and lsat ltteer be at the rghit pclae. The rset can be a toatl mses and you can " +
         "sitll raed it wouthit porbelm. Tihs is bcuseae the huamn mnid deos not raed ervey lteter by istlef, " +
-        "but the wrod as a wlohe."
+        "but the wrod as a wlohe.",
+
+        "Is this the real life\nIs this just fantasy\nCaught in a landslide,\nNo escape from reality.\n" + 
+        "Open your eyes,\nLook up to the skies and see,\nI m just a poor boy, I need no sympathy,\n" +
+        "Because I'm easy come, easy go,\nLittle high, little low,"
     };
 
     private ColoredText coloredStringToRace;
@@ -87,11 +91,9 @@ public class TypeRacerSystem : MonoBehaviour
         }
 
         var currentData = coloredStringToRace.list[index];
-
-        var currentCode = currentData.code;
         var startIndex = index;
 
-        if (currentCode == KeyCode.Space)
+        if (currentData.c == ' ' || currentData.c == '\n')
         {
             wordCompletedCount++;
             if (wordCompletedCount % wordCountForPoints == 0)
@@ -108,7 +110,7 @@ public class TypeRacerSystem : MonoBehaviour
             UpdateColoredText();
         }
 
-        if (Input.GetKeyDown(currentCode))
+        if (Input.GetKeyDown(currentData.code))
         {
             coloredStringToRace.SetColorAt(index, TextColor.SUCCESS);
             index++;
