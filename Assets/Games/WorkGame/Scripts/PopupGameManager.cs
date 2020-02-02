@@ -39,9 +39,7 @@ public class PopupGameManager : MonoBehaviour
 
     public void ClosePopup()
     {
-        Debug.Log("Debug");
         Destroy(currentPopup);
-        GameManager.Instance.SendReward(GameType.Work, rewardValue);
         CreatePopup();
     }
 
