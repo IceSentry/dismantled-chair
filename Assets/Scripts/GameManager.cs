@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     [Header("GameObject")]
     public Slider[] sliders;
     public EventManager eventManager;
+    public GameObject[] visualGameStates;
 
     [Header("Data")]
     public float globalSpeed = 1f;
@@ -151,15 +152,15 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetButtonDown("Button_A"))
         {
             LoadGame(GameType.Work);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        else if (Input.GetKeyDown(KeyCode.Return))
         {
             LoadGame(GameType.Study);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        else if (Input.GetMouseButtonDown(0))
         {
             LoadGame(GameType.Sleep);
         }
@@ -179,11 +180,22 @@ public class GameManager : MonoBehaviour
     {
         UnloadCurrentScene();
 
+        if (visualGameStates[(int)currentType] != null)
+        {
+            visualGameStates[(int)currentType].SetActive(false);
+        }
+
+        if (visualGameStates[(int)type] != null)
+        {
+            visualGameStates[(int)type].SetActive(true);
+        }
+
         currentType = type;
         int scene = GetRandomGame(type);
         if (scene > 0)
         {
             LoadTargetScene(scene);
+
         }
     }
 

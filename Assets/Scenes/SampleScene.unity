@@ -1356,6 +1356,10 @@ MonoBehaviour:
   - {fileID: 701342121}
   - {fileID: 1660706033}
   eventManager: {fileID: 624976380}
+  visualGameStates:
+  - {fileID: 1356750210}
+  - {fileID: 126536318}
+  - {fileID: 0}
   globalSpeed: 1
   gameConfig:
     WorkTimer: 3
