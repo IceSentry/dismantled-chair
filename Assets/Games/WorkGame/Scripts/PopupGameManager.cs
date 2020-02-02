@@ -11,6 +11,7 @@ public class PopupGameManager : MonoBehaviour
     public Transform shakeTarget;
     public float shakeDuration;
     public Vector3 shakeStrength;
+    public float disableTime;
     private GameObject currentPopup;
     private float shakeTimeRemaining;
 

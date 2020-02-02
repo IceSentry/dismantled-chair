@@ -39,6 +39,7 @@ public class PopupGame : MonoBehaviour
 
     int SpriteListIndex = 0;
     float rewardAccumulate = 0;
+    bool isDisabled = false;
 
 
     // Start is called before the first frame update
@@ -58,14 +59,15 @@ public class PopupGame : MonoBehaviour
 
     void PlaySequence()
     {
+
         if (ButtonQueue.Count == 0)
         {
             PopupGameManager.Instance.ClosePopup();
         }
 
-
         if (ButtonQueue.Count != 0)
         {
+
             int buttonMask = 0;
             buttonMask |= Input.GetButtonDown(Button_A_string) ? 1 << (int)ButtonType.Button_A : 0;
             buttonMask |= Input.GetButtonDown(Button_B_string) ? 1 << (int)ButtonType.Button_B : 0;
@@ -78,6 +80,12 @@ public class PopupGame : MonoBehaviour
 
             if (buttonMask == 1 << (int)peeked)
             {
+
+                if (isDisabled)
+                {
+                    PopupGameManager.Instance.ShakeCamera();
+                    return;
+                }
                 ButtonQueue.Dequeue();
                 ButtonSpriteList[SpriteListIndex].color = new Color(ButtonSpriteList[SpriteListIndex].color.r / 2,
                                                                     ButtonSpriteList[SpriteListIndex].color.g / 2,
@@ -94,7 +102,7 @@ public class PopupGame : MonoBehaviour
                     rewardAccumulate--;
                     GameManager.Instance.SendReward(GameType.Work, PopupGameManager.Instance.rewardValue);
                 }
-                    
+
             }
             else if (buttonMask != 0)
             {
