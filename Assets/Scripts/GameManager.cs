@@ -245,6 +245,11 @@ public class GameManager : MonoBehaviour
         gameOverGroup.SetActive(true);
         leftPanel.DOAnchorPos3DX(600, UIAnimationSpeed);
 
+        for (int i = 0; i < visualGameStates.Length; i++)
+            visualGameStates[i].SetActive(false);
+
+        visualGameStates[3].SetActive(true);
+
         yield return new WaitForSeconds(UIAnimationSpeed);
 
         DisableGameplay();

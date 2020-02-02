@@ -21,10 +21,10 @@ public class EventManager : MonoBehaviour
 
     [Header("Event")]
     public GameEventObject[] gameEvents;
-    
+
     [HideInInspector]
     public float timer = -15f;
-    
+
     [HideInInspector]
     public int index = 0;
 
@@ -51,7 +51,7 @@ public class EventManager : MonoBehaviour
                 gameEvent.Visuals[i].SetActive(true);
             }
 
-            warningEvent.DOLocalMoveY(700, 3f, true).OnComplete(() => 
+            warningEvent.DOLocalMoveY(700, 3f, true).OnComplete(() =>
             {
                 Vector2 pos = warningEvent.localPosition;
                 pos.y = -700;
@@ -64,46 +64,46 @@ public class EventManager : MonoBehaviour
             ShowDebuff(gameEvent.Debuffs);
 
             if (index >= gameEvents.Length)
-                index = 0;
+                enabled = false;
 
             timer -= spawnTime;
         }
+    }
 
-        void ShowDebuff(DebuffType[] debuffs)
+    void ShowDebuff(DebuffType[] debuffs)
+    {
+        for (int i = 0; i < debuffs.Length; i++)
         {
-            for (int i = 0; i < debuffs.Length; i++)
+            switch (debuffs[i])
             {
-                switch (debuffs[i])
-                {
-                    case DebuffType.NormalWork:
-                        debuffRenderers[0].debuff.SetActive(true);
-                        break;
-                    case DebuffType.BigWork:
-                        debuffRenderers[0].bigDebuff.SetActive(true);
-                        break;
-                    case DebuffType.NormalStudy:
-                        debuffRenderers[1].debuff.SetActive(true);
-                        break;
-                    case DebuffType.BigStudy:
-                        debuffRenderers[1].bigDebuff.SetActive(true);
-                        break;
-                    case DebuffType.NormalSleep:
-                        debuffRenderers[2].debuff.SetActive(true);
-                        break;
-                    case DebuffType.BigSleep:
-                        debuffRenderers[2].bigDebuff.SetActive(true);
-                        break;
-                }
+                case DebuffType.NormalWork:
+                    debuffRenderers[0].debuff.SetActive(true);
+                    break;
+                case DebuffType.BigWork:
+                    debuffRenderers[0].bigDebuff.SetActive(true);
+                    break;
+                case DebuffType.NormalStudy:
+                    debuffRenderers[1].debuff.SetActive(true);
+                    break;
+                case DebuffType.BigStudy:
+                    debuffRenderers[1].bigDebuff.SetActive(true);
+                    break;
+                case DebuffType.NormalSleep:
+                    debuffRenderers[2].debuff.SetActive(true);
+                    break;
+                case DebuffType.BigSleep:
+                    debuffRenderers[2].bigDebuff.SetActive(true);
+                    break;
             }
         }
+    }
 
-        void HideAllDebuffs()
+    void HideAllDebuffs()
+    {
+        for (int i = 0; i < debuffRenderers.Length; i++)
         {
-            for (int i = 0; i < debuffRenderers.Length; i++)
-            {
-                debuffRenderers[i].debuff.SetActive(false);
-                debuffRenderers[i].bigDebuff.SetActive(false);
-            }
+            debuffRenderers[i].debuff.SetActive(false);
+            debuffRenderers[i].bigDebuff.SetActive(false);
         }
     }
 }
