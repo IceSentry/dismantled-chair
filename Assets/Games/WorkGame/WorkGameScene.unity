@@ -251,3 +251,4 @@ MonoBehaviour:
   - {fileID: 7430399859125870308, guid: 4d18c86212278cd4aab07873b05a1fdf, type: 3}
   - {fileID: 5816744323072789071, guid: ea306a2d1e789e646bc3e3c19dc32e4c, type: 3}
   - {fileID: 7318487374577510282, guid: f760f24c2142b9244b36f62ef94520d5, type: 3}
+  rewardValue: 1
