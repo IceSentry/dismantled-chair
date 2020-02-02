@@ -41,7 +41,6 @@ public class PopupGame : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Shuffle(buttonSpawners);
         GenerateButtonSequence();
         ButtonSpriteList[SpriteListIndex].enabled = true;
         ButtonSpriteList[SpriteListIndex].transform.DOPunchScale(new Vector3(breathingScalingX, breathingScalingY), breathingDuration);
@@ -81,8 +80,12 @@ public class PopupGame : MonoBehaviour
                                                                     ButtonSpriteList[SpriteListIndex].color.g / 2,
                                                                     ButtonSpriteList[SpriteListIndex].color.b / 2,
                                                                     ButtonSpriteList[SpriteListIndex].color.a / 2);
-                ButtonSpriteList[++SpriteListIndex].enabled = true;
+                if (SpriteListIndex < ButtonSpriteList.Count-1)
+                    SpriteListIndex++;
+
+                ButtonSpriteList[SpriteListIndex].enabled = true;
                 ButtonSpriteList[SpriteListIndex].transform.DOPunchScale(new Vector3(breathingScalingX, breathingScalingY), breathingDuration);
+                GameManager.Instance.SendReward(GameType.Work, PopupGameManager.Instance.rewardValue);
             }
             else if (buttonMask != 0)
             {
@@ -104,12 +107,5 @@ public class PopupGame : MonoBehaviour
             ButtonSpriteList.Add(buttonSpanwer);
 
         }
-    }
-    void Breathing(SpriteRenderer buttonSpriteRenderer)
-    {
-        while (buttonSpriteRenderer.enabled) {
-            
-        }
-
     }
 }
