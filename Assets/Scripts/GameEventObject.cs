@@ -15,6 +15,7 @@ public class GameEventObject
 {
     public string Description;
     public string EffectDescription;
+    public string EndStatusDesc;
     public GameObject[] Visuals;
 
     public DebuffType[] Debuffs;
