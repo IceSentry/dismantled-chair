@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,6 +10,13 @@ public enum GameType
     Work,
     Study,
     Sleep
+}
+
+public enum GameState
+{
+    Start,
+    During,
+    GameOver
 }
 
 [System.Serializable]
@@ -26,15 +34,22 @@ public class GameManager : MonoBehaviour
 
     [Header("GameObject")]
     public Slider[] sliders;
+    public EventManager eventManager;
 
     [Header("Data")]
-    public GameConfig[] gameConfigs;
+    public float globalSpeed = 1f;
+    public GameConfig gameConfig;
     public PairGameTypeSceneIndex[] scenes;
+
+    [Header("UI")]
+    public RectTransform rightPanel;
+    public RectTransform titleText;
 
     GameType game;
     List<int>[] gameLists;
     int difficulty;
 
+    GameState gameState;
     GameType currentType;
     int currentScene = -1;
 
@@ -48,6 +63,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameState = GameState.Start;
+
         gameTimers = new float[GAMETYPE_COUNT];
         gameLists = new List<int>[GAMETYPE_COUNT];
         for (int i = 0; i < GAMETYPE_COUNT; i++)
@@ -63,14 +80,73 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GameConfig config = gameConfigs[difficulty];
+        switch (gameState)
+        {
+            case GameState.Start:
+                ScreenPlay();
+                break;
+            case GameState.During:
+                DuringPlay();
+                break;
+            case GameState.GameOver:
+                break;
+        }   
+    }
+
+    public void DebuffConfig(GameConfig config)
+    {
+        gameConfig.WorkTimer -= config.WorkTimer;
+        gameConfig.SleepTimer -= config.SleepTimer;
+        gameConfig.StudyTimer -= config.StudyTimer;
+    }
+
+    public void SendReward(GameType type, int reward)
+    {
+        sliders[(int)type].value += reward;
+    }
+
+    public void EndGame(GameType type, int reward)
+    {
+        SendReward(type, reward);
+        LoadGame(type);
+    }
+
+    void ScreenPlay()
+    {
+        if (Input.anyKeyDown)
+        {
+            rightPanel.DOAnchorPos3DX(-360, 0.5f);
+            titleText.DOAnchorPos3DX(-400, 0.5f);
+            StartCoroutine(WaitToStart());
+        }
+    }
+
+    IEnumerator WaitToStart()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        gameState = GameState.During;
+        eventManager.gameObject.SetActive(true);
+    }
+
+    void DuringPlay()
+    {
         for (int i = 0; i < gameTimers.Length; i++)
         {
-            float timer = config.GetTimer((GameType)i);
-            gameTimers[i] += Time.deltaTime * config.GlobalSpeed;
+            gameTimers[i] += Time.deltaTime * globalSpeed;
+            float timer = gameConfig.GetTimer((GameType)i);
             if (gameTimers[i] >= timer)
             {
-                sliders[i].value += 1;
+                var slider = sliders[i];
+                if (slider.value > 0)
+                {
+                    slider.value -= 1;
+                }
+                else
+                {
+                    GameOver();
+                    return;
+                }
                 gameTimers[i] -= timer;
             }
         }
@@ -89,15 +165,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SendReward(GameType type, int reward)
+    void GameOver()
     {
-        sliders[(int)type].value -= reward;
-    }
-
-    public void EndGame(GameType type, int reward)
-    {
-        SendReward(type, reward);
-        LoadGame(type);
+        if (gameState != GameState.GameOver)
+        {
+            Debug.Log("GameOver");
+            UnloadCurrentScene();
+            gameState = GameState.GameOver;
+        }
     }
 
     void LoadGame(GameType type)
@@ -105,7 +180,11 @@ public class GameManager : MonoBehaviour
         UnloadCurrentScene();
 
         currentType = type;
-        LoadTargetScene(GetRandomGame(type));
+        int scene = GetRandomGame(type);
+        if (scene > 0)
+        {
+            LoadTargetScene(scene);
+        }
     }
 
     void LoadTargetScene(int scene)
@@ -126,7 +205,10 @@ public class GameManager : MonoBehaviour
     int GetRandomGame(GameType type)
     {
         var list = gameLists[(int)type];
-        return list[Random.Range(0, list.Count)];
+        if(list.Count > 0)
+            return list[Random.Range(0, list.Count)];
+
+        return -1;
     }
 }
 
