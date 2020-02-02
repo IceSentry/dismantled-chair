@@ -1534,7 +1534,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Fatigue
+  m_Text: Sleep
 --- !u!1 &7334167443432452227
 GameObject:
   m_ObjectHideFlags: 0
@@ -1981,7 +1981,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Schoolwork
+  m_Text: Study
 --- !u!1 &8884331284612640663
 GameObject:
   m_ObjectHideFlags: 0
@@ -2058,7 +2058,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Debt
+  m_Text: Cash
 --- !u!1 &9141731667109822770
 GameObject:
   m_ObjectHideFlags: 0
