@@ -110,6 +110,9 @@ MonoBehaviour:
   - {fileID: -7138311499508957143, guid: a1178578399e9704fbf5910c8e61c850, type: 3}
   - {fileID: 650656284835190746, guid: a1178578399e9704fbf5910c8e61c850, type: 3}
   - {fileID: -9124727645642988533, guid: a1178578399e9704fbf5910c8e61c850, type: 3}
+  breathingScalingX: 0.25
+  breathingScalingY: 0.25
+  breathingDuration: 0.25
 --- !u!1001 &7318487373318887977
 PrefabInstance:
   m_ObjectHideFlags: 0
