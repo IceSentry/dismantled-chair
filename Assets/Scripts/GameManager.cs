@@ -178,6 +178,9 @@ public class GameManager : MonoBehaviour
 
     void LoadGame(GameType type)
     {
+        if (type == currentType && currentScene > 0)
+            return;
+
         UnloadCurrentScene();
 
         if (visualGameStates[(int)currentType] != null)
