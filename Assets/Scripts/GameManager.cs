@@ -115,15 +115,15 @@ public class GameManager : MonoBehaviour
     {
         if (Input.anyKeyDown)
         {
-            rightPanel.DOAnchorPos3DX(-360, 2f);
-            titleText.DOAnchorPos3DX(-400, 2f);
+            rightPanel.DOAnchorPos3DX(-360, 0.5f);
+            titleText.DOAnchorPos3DX(-400, 0.5f);
             StartCoroutine(WaitToStart());
         }
     }
 
     IEnumerator WaitToStart()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.5f);
 
         gameState = GameState.During;
         eventManager.gameObject.SetActive(true);
