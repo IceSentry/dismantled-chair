@@ -112,8 +112,8 @@ public class PopupGame : MonoBehaviour
             SequenceButtons tmpButton = (SequenceButtons)Random.Range(0, ButtonCount);
             ButtonQueue.Enqueue(tmpButton);
             Sprite sprite = buttonSprites[(int)tmpButton];
-            renderer.sprite = sprite;
-            ButtonSpriteList.Add(renderer);
+            GetComponent<Renderer>().sprite = sprite;
+            ButtonSpriteList.Add(GetComponent<Renderer>());
             //buttonSprites[]
             //buttonSprites[i].enabled = true;
 
