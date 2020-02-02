@@ -252,3 +252,6 @@ MonoBehaviour:
   - {fileID: 5816744323072789071, guid: ea306a2d1e789e646bc3e3c19dc32e4c, type: 3}
   - {fileID: 7318487374577510282, guid: f760f24c2142b9244b36f62ef94520d5, type: 3}
   rewardValue: 1
+  shakeTarget: {fileID: 1238377124}
+  shakeDuration: 0.1
+  shakeStrength: {x: 0.15, y: 0.15, z: 0}
