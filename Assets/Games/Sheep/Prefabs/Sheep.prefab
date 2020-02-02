@@ -228,7 +228,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.2, y: 0.04}
+    oldSize: {x: 0.6060606, y: 0.121212125}
     newSize: {x: 0.2, y: 0.04}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -384,7 +384,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.2, y: 0.04}
+    oldSize: {x: 0.6060606, y: 0.121212125}
     newSize: {x: 0.2, y: 0.04}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -528,7 +528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbaaa16f5284e474fbb9ef8f326023df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 10
   distance: 1
   activeIndicator: {fileID: 846116871}
   bodiesPart:
@@ -683,7 +683,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.2, y: 0.04}
+    oldSize: {x: 0.6060606, y: 0.121212125}
     newSize: {x: 0.2, y: 0.04}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -875,7 +875,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.2, y: 0.04}
+    oldSize: {x: 0.6060606, y: 0.121212125}
     newSize: {x: 0.2, y: 0.04}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
