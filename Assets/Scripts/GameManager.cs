@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
     float[] gameTimers;
 
     bool gameStarted;
+    Coroutine transition;
 
     private void Awake()
     {
@@ -105,10 +106,9 @@ public class GameManager : MonoBehaviour
 
     void ScreenPlay()
     {
-        if (Input.anyKeyDown)
+        if (Input.anyKeyDown && transition == null)
         {
-
-            StartCoroutine(WaitToStart());
+            transition = StartCoroutine(WaitToStart());
         }
     }
 
@@ -137,6 +137,8 @@ public class GameManager : MonoBehaviour
         {
             sliders[i].value--;
         }
+
+        transition = null;
     }
 
     void DuringPlay()
@@ -192,7 +194,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Finish");
         gameState = GameState.EndGame;
-        StartCoroutine(ShowVictoryPanel());
+        transition = StartCoroutine(ShowVictoryPanel());
     }
 
     IEnumerator ShowVictoryPanel()
@@ -205,6 +207,8 @@ public class GameManager : MonoBehaviour
         DisableGameplay();
 
         StartCoroutine(WaitForRestart());
+
+        transition = null;
     }
 
     void GameOver()
@@ -212,7 +216,7 @@ public class GameManager : MonoBehaviour
         if (gameState != GameState.EndGame)
         {
             gameState = GameState.EndGame;
-            StartCoroutine(ShowGameOverPanel());
+            transition = StartCoroutine(ShowGameOverPanel());
         }
     }
 
@@ -232,6 +236,8 @@ public class GameManager : MonoBehaviour
         DisableGameplay();
 
         StartCoroutine(WaitForRestart());
+
+        transition = null;
     }
 
     IEnumerator WaitForRestart()
