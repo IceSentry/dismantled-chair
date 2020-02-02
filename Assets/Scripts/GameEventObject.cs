@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "Config", menuName = "Data/Config", order = 1)]
-public class GameEventObject : ScriptableObject
+[System.Serializable]
+public class GameEventObject
 {
     public string Description;
+    public GameObject[] Visuals;
     public GameConfig Config;
 }
