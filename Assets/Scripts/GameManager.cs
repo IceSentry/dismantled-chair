@@ -131,7 +131,6 @@ public class GameManager : MonoBehaviour
 
     void DuringPlay()
     {
-
         for (int i = 0; i < gameTimers.Length; i++)
         {
             gameTimers[i] += Time.deltaTime * globalSpeed;
@@ -146,6 +145,7 @@ public class GameManager : MonoBehaviour
                 else
                 {
                     GameOver();
+                    return;
                 }
                 gameTimers[i] -= timer;
             }
@@ -167,8 +167,12 @@ public class GameManager : MonoBehaviour
 
     void GameOver()
     {
-        Debug.Log("GameOver");
-        UnloadCurrentScene();
+        if (gameState != GameState.GameOver)
+        {
+            Debug.Log("GameOver");
+            UnloadCurrentScene();
+            gameState = GameState.GameOver;
+        }
     }
 
     void LoadGame(GameType type)
