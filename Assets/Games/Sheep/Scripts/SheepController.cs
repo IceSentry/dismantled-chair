@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,10 +13,16 @@ public class SheepController : MonoBehaviour
     Vector3 startingPos;
     Rigidbody2D rigid;
 
+    public Transform shakeTarget;
+    public float shakeDuration = 0.2f;
+    public Vector3 shakeStrength = new Vector3(0.15f, 0.15f, 0);
+    private float shakeTimeRemaining;
+
     private void Start()
     {
         startingPos = transform.position;
         rigid = GetComponent<Rigidbody2D>();
+        shakeTarget = Camera.main.transform;
     }
 
     // Update is called once per frame
@@ -42,6 +49,8 @@ public class SheepController : MonoBehaviour
             }
             rigid.MovePosition(Vector3.Lerp(transform.position, worldPos, speed * Time.deltaTime));
         }
+
+        shakeTimeRemaining -= Time.deltaTime;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -56,6 +65,12 @@ public class SheepController : MonoBehaviour
 
         isActive = false;
         activeIndicator.SetActive(true);
+
+        if (shakeTimeRemaining < 0)
+        {
+            shakeTarget.DOShakePosition(shakeDuration, shakeStrength, 20, 200f);
+            shakeTimeRemaining = shakeDuration;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
