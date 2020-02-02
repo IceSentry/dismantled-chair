@@ -21,9 +21,12 @@ public class EventManager : MonoBehaviour
 
     [Header("Event")]
     public GameEventObject[] gameEvents;
-
-    float timer = -5f;
-    int index = 0;
+    
+    [HideInInspector]
+    public float timer = -15f;
+    
+    [HideInInspector]
+    public int index = 0;
 
     private void Awake()
     {

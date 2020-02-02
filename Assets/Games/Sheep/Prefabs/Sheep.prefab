@@ -528,7 +528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbaaa16f5284e474fbb9ef8f326023df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 25
+  speed: 10
   distance: 1
   activeIndicator: {fileID: 846116871}
   bodiesPart:
@@ -536,6 +536,9 @@ MonoBehaviour:
   - {fileID: 2120281323913208947}
   - {fileID: 2120281322664263195}
   - {fileID: 2120281323363865017}
+  shakeTarget: {fileID: 0}
+  shakeDuration: 0.2
+  shakeStrength: {x: 0.15, y: 0.15, z: 0}
 --- !u!1 &2120281323363865017
 GameObject:
   m_ObjectHideFlags: 0

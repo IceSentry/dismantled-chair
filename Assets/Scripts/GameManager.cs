@@ -228,6 +228,20 @@ public class GameManager : MonoBehaviour
 
     IEnumerator ShowGameOverPanel()
     {
+        if (eventManager.index > 0)
+        {
+            var text = "You failed at fixing you life because:\n";
+            for (int i = 0; i <= eventManager.index; i++)
+            {
+                text += $" - {eventManager.gameEvents[i].EndStatusDesc}\n";
+            }
+            gameOverStatusText.text = text;
+        }
+        else
+        {
+            gameOverStatusText.enabled = false;
+        }
+
         gameOverGroup.SetActive(true);
         leftPanel.DOAnchorPos3DX(600, UIAnimationSpeed);
 
