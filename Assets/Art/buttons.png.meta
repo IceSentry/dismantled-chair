@@ -104,6 +104,9 @@ TextureImporter:
   - first:
       213: -9124727645642988533
     second: buttons_12
+  - first:
+      213: -2986871994705294210
+    second: buttons_enter
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -343,7 +346,7 @@ TextureImporter:
         width: 32
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -469,7 +472,7 @@ TextureImporter:
         width: 32
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -477,6 +480,27 @@ TextureImporter:
       bones: []
       spriteID: b0463491d847e5180800000000000000
       internalID: -9124727645642988533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buttons_enter
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 80
+        width: 32
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7c4706febf7c86d0800000000000000
+      internalID: -2986871994705294210
       vertices: []
       indices: 
       edges: []
