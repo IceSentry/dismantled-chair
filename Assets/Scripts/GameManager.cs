@@ -34,9 +34,10 @@ public class GameManager : MonoBehaviour
 
     [Header("GameObject")]
     public Slider[] sliders;
+    public EventManager eventManager;
 
     [Header("Data")]
-    public float globalSpeed = 0.1f;
+    public float globalSpeed = 1f;
     public GameConfig gameConfig;
     public PairGameTypeSceneIndex[] scenes;
 
@@ -92,6 +93,13 @@ public class GameManager : MonoBehaviour
         }   
     }
 
+    public void DebuffConfig(GameConfig config)
+    {
+        gameConfig.WorkTimer -= config.WorkTimer;
+        gameConfig.SleepTimer -= config.SleepTimer;
+        gameConfig.StudyTimer -= config.StudyTimer;
+    }
+
     public void SendReward(GameType type, int reward)
     {
         sliders[(int)type].value += reward;
@@ -107,17 +115,18 @@ public class GameManager : MonoBehaviour
     {
         if (Input.anyKeyDown)
         {
-            rightPanel.DOAnchorPos3DX(-360, 3f);
-            titleText.DOAnchorPos3DX(-400, 3f);
+            rightPanel.DOAnchorPos3DX(-360, 2f);
+            titleText.DOAnchorPos3DX(-400, 2f);
             StartCoroutine(WaitToStart());
         }
     }
 
     IEnumerator WaitToStart()
     {
-        yield return new WaitForSeconds(3f);
-        gameState = GameState.During;
+        yield return new WaitForSeconds(2f);
 
+        gameState = GameState.During;
+        eventManager.gameObject.SetActive(true);
     }
 
     void DuringPlay()
@@ -130,7 +139,7 @@ public class GameManager : MonoBehaviour
             if (gameTimers[i] >= timer)
             {
                 var slider = sliders[i];
-                if (slider.value < slider.maxValue)
+                if (slider.value > 0)
                 {
                     slider.value -= 1;
                 }

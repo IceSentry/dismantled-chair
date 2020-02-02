@@ -21,9 +21,3 @@ public struct GameConfig
         throw new System.ArgumentException($"GameType: {type} is not valid.");
     }
 }
-
-[CreateAssetMenu(fileName = "Config", menuName = "Data/Config", order = 1)]
-public class GameConfigObject : ScriptableObject
-{
-    public GameConfig Config;
-}
