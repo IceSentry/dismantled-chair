@@ -98,7 +98,6 @@ public class PopupGame : MonoBehaviour
             }
             else if (buttonMask != 0)
             {
-                Debug.Log("Wrong Button");
                 PopupGameManager.Instance.ShakeCamera();
             }
         }
