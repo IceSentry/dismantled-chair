@@ -38,7 +38,11 @@ public class GameManager : MonoBehaviour
 
     [Header("UI")]
     public RectTransform rightPanel;
+    public RectTransform leftPanel;
     public RectTransform titleText;
+    public Text leftText;
+    public GameObject leftButtonsGroup;
+    public float UIAnimationSpeed;
 
     GameConfig debuffEvent;
     GameType currentType;
@@ -48,6 +52,8 @@ public class GameManager : MonoBehaviour
 
     float endGameTimer;
     float[] gameTimers;
+
+    bool gameStarted;
 
     private void Awake()
     {
@@ -68,7 +74,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.EndGame:
                 break;
-        }   
+        }
     }
 
     public void DebuffConfig(GameConfig config)
@@ -98,21 +104,33 @@ public class GameManager : MonoBehaviour
     {
         if (Input.anyKeyDown)
         {
-            rightPanel.DOAnchorPos3DX(-360, 0.5f);
-            titleText.DOAnchorPos3DX(-400, 0.5f);
+
             StartCoroutine(WaitToStart());
         }
     }
 
     IEnumerator WaitToStart()
     {
-        yield return new WaitForSeconds(0.5f);
+        rightPanel.DOAnchorPos3DX(-360, UIAnimationSpeed);
+        leftPanel.DOAnchorPos3DX(600, UIAnimationSpeed);
+        titleText.DOAnchorPos3DX(-400, UIAnimationSpeed);
+
+        yield return new WaitForSeconds(UIAnimationSpeed);
+
+        yield return new WaitUntil(() =>
+        {
+            CheckEnterGameInput();
+            return gameStarted;
+        });
+
+        leftPanel.DOAnchorPos3DX(-600, UIAnimationSpeed);
+        yield return new WaitForSeconds(UIAnimationSpeed);
 
         gameState = GameState.During;
         eventManager.enabled = true;
         for (int i = 0; i < sliders.Length; i++)
         {
-            sliders[i].value -= 1;
+            sliders[i].value--;
         }
     }
 
@@ -127,7 +145,7 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < gameTimers.Length; i++)
         {
-            GameType gameType = (GameType)i;
+            var gameType = (GameType)i;
             gameTimers[i] += Time.deltaTime * globalSpeed;
             float timer = gameConfig.GetTimer(gameType) - debuffEvent.GetTimer(gameType);
             if (gameTimers[i] >= timer)
@@ -146,6 +164,11 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        CheckEnterGameInput();
+    }
+
+    void CheckEnterGameInput()
+    {
         if (Input.GetButtonDown("Button_A"))
         {
             EnterGame(GameType.Work);
@@ -163,6 +186,7 @@ public class GameManager : MonoBehaviour
     void Finish()
     {
         Debug.Log("Finish");
+        gameState = GameState.EndGame;
         DisableGameplay();
     }
 
@@ -170,21 +194,33 @@ public class GameManager : MonoBehaviour
     {
         if (gameState != GameState.EndGame)
         {
-            Debug.Log("GameOver");
-            DisableGameplay();
+            gameState = GameState.EndGame;
+            StartCoroutine(ShowGameOverPanel());
         }
     }
 
     void DisableGameplay()
     {
         UnloadCurrentScene();
-        gameState = GameState.EndGame;
-
         eventManager.enabled = false;
+    }
+
+    IEnumerator ShowGameOverPanel()
+    {
+        leftText.text = "game over";
+        leftButtonsGroup.SetActive(false);
+        leftPanel.DOAnchorPos3DX(600, UIAnimationSpeed);
+
+        yield return new WaitForSeconds(UIAnimationSpeed);
+
+        DisableGameplay();
     }
 
     void EnterGame(GameType type)
     {
+        if (!gameStarted)
+            gameStarted = true;
+
         if (type == currentType && currentScene > 0)
             return;
 
@@ -195,22 +231,14 @@ public class GameManager : MonoBehaviour
     {
         UnloadCurrentScene();
 
-        if (visualGameStates[(int)currentType] != null)
-        {
-            visualGameStates[(int)currentType].SetActive(false);
-        }
-
-        if (visualGameStates[(int)type] != null)
-        {
-            visualGameStates[(int)type].SetActive(true);
-        }
+        visualGameStates[(int)currentType]?.SetActive(false);
+        visualGameStates[(int)type]?.SetActive(true);
 
         currentType = type;
         int scene = GetGameScene(type);
         if (scene > 0)
         {
             LoadTargetScene(scene);
-
         }
     }
 
