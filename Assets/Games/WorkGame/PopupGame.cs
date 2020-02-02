@@ -109,11 +109,11 @@ public class PopupGame : MonoBehaviour
     void AddButtons() {
         for (int i = 0; i < SpriteCount; i++)
         {
-            SequenceButtons tmpButton = (SequenceButtons)Random.Range(0, ButtonCount);
-            ButtonQueue.Enqueue(tmpButton);
-            Sprite sprite = buttonSprites[(int)tmpButton];
-            GetComponent<Renderer>().sprite = sprite;
-            ButtonSpriteList.Add(GetComponent<Renderer>());
+            //SequenceButtons tmpButton = (SequenceButtons)Random.Range(0, ButtonCount);
+            //ButtonQueue.Enqueue(tmpButton);
+            //var sprite = buttonSprites[(int)tmpButton];
+            //GetComponent<SpriteRenderer>().sprite = sprite;
+            //ButtonSpriteList.Add(GetComponent<Renderer>());
             //buttonSprites[]
             //buttonSprites[i].enabled = true;
 
