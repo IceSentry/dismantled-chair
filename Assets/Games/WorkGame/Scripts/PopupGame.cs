@@ -15,7 +15,7 @@ public class PopupGame : MonoBehaviour
 
     const int MaxGameCount = 3;
 
-    enum SequenceButtons
+    enum ButtonType
     {
         Button_A,
         Button_B,
@@ -28,7 +28,7 @@ public class PopupGame : MonoBehaviour
     public SpriteRenderer workLevelBG;
     public SpriteRenderer[] buttonSpawners;
     public Sprite[] buttonIcons = new Sprite[ButtonCount];
-    Queue<SequenceButtons> ButtonQueue = new Queue<SequenceButtons>();
+    Queue<ButtonType> ButtonQueue = new Queue<ButtonType>();
     List<SpriteRenderer> ButtonSpriteList = new List<SpriteRenderer>();
 
     int SpriteListIndex = 0;
@@ -37,7 +37,8 @@ public class PopupGame : MonoBehaviour
     void Start()
     {
         //Shuffle(buttonSpawners);
-        AddButtons();
+        GenerateButtonSequence();
+        ButtonSpriteList[SpriteListIndex].enabled = true;
 
     }
 
@@ -58,26 +59,23 @@ public class PopupGame : MonoBehaviour
         if (ButtonQueue.Count != 0)
         {
             int buttonMask = 0;
-            buttonMask |= Input.GetButtonDown(Button_A_string) ? 1 << (int)SequenceButtons.Button_A : 0;
-            buttonMask |= Input.GetButtonDown(Button_B_string) ? 1 << (int)SequenceButtons.Button_B : 0;
-            buttonMask |= Input.GetButtonDown(Button_X_string) ? 1 << (int)SequenceButtons.Button_X : 0;
-            buttonMask |= Input.GetButtonDown(Button_Y_string) ? 1 << (int)SequenceButtons.Button_Y : 0;
-            buttonMask |= Input.GetButtonDown(Left_Bumper_string) ? 1 << (int)SequenceButtons.Left_Bumper : 0;
-            buttonMask |= Input.GetButtonDown(Right_Bumper_string) ? 1 << (int)SequenceButtons.Right_Bumper : 0;
+            buttonMask |= Input.GetButtonDown(Button_A_string) ? 1 << (int)ButtonType.Button_A : 0;
+            buttonMask |= Input.GetButtonDown(Button_B_string) ? 1 << (int)ButtonType.Button_B : 0;
+            buttonMask |= Input.GetButtonDown(Button_X_string) ? 1 << (int)ButtonType.Button_X : 0;
+            buttonMask |= Input.GetButtonDown(Button_Y_string) ? 1 << (int)ButtonType.Button_Y : 0;
+            buttonMask |= Input.GetButtonDown(Left_Bumper_string) ? 1 << (int)ButtonType.Left_Bumper : 0;
+            buttonMask |= Input.GetButtonDown(Right_Bumper_string) ? 1 << (int)ButtonType.Right_Bumper : 0;
 
-            SequenceButtons peeked = ButtonQueue.Peek();
+            ButtonType peeked = ButtonQueue.Peek();
 
             if (buttonMask == 1 << (int)peeked)
             {
-                Debug.Log("Dequeued " + peeked);
                 ButtonQueue.Dequeue();
-                Debug.Log(SpriteListIndex);
-                Debug.Log(ButtonSpriteList.Count);
                 ButtonSpriteList[SpriteListIndex].color = new Color(ButtonSpriteList[SpriteListIndex].color.r / 2,
                                                                     ButtonSpriteList[SpriteListIndex].color.g / 2,
                                                                     ButtonSpriteList[SpriteListIndex].color.b / 2,
                                                                     ButtonSpriteList[SpriteListIndex].color.a / 2);
-                SpriteListIndex++;
+                ButtonSpriteList[++SpriteListIndex].enabled = true;
             }
             else if (buttonMask != 0)
             {
@@ -86,16 +84,17 @@ public class PopupGame : MonoBehaviour
         }
     }
 
-    void AddButtons()
+    void GenerateButtonSequence()
     {
         foreach (SpriteRenderer buttonSpanwer in buttonSpawners)
         {
-            SequenceButtons tmpButton = (SequenceButtons)Random.Range(0, ButtonCount);
+            ButtonType tmpButton = (ButtonType)Random.Range(0, ButtonCount);
             ButtonQueue.Enqueue(tmpButton);
             Sprite sprite = buttonIcons[(int)tmpButton];
             buttonSpanwer.GetComponent<SpriteRenderer>().sprite = sprite;
+            buttonSpanwer.enabled = false;
             ButtonSpriteList.Add(buttonSpanwer);
-            buttonSpanwer.enabled = true;
+
         }
     }
 }
