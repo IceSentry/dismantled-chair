@@ -37,12 +37,15 @@ public class GameManager : MonoBehaviour
     public GameConfig gameConfig;
 
     [Header("UI")]
+
     public RectTransform rightPanel;
     public RectTransform leftPanel;
     public RectTransform titleText;
-    public Text leftText;
-    public GameObject leftButtonsGroup;
     public float UIAnimationSpeed;
+    public GameObject introGroup;
+    public GameObject gameOverGroup;
+    public GameObject victoryGroup;
+    public Text gameOverStatusText;
 
     GameConfig debuffEvent;
     GameType currentType;
@@ -54,6 +57,7 @@ public class GameManager : MonoBehaviour
     float[] gameTimers;
 
     bool gameStarted;
+    Coroutine transition;
 
     private void Awake()
     {
@@ -102,10 +106,9 @@ public class GameManager : MonoBehaviour
 
     void ScreenPlay()
     {
-        if (Input.anyKeyDown)
+        if (Input.anyKeyDown && transition == null)
         {
-
-            StartCoroutine(WaitToStart());
+            transition = StartCoroutine(WaitToStart());
         }
     }
 
@@ -126,12 +129,16 @@ public class GameManager : MonoBehaviour
         leftPanel.DOAnchorPos3DX(-600, UIAnimationSpeed);
         yield return new WaitForSeconds(UIAnimationSpeed);
 
+        introGroup.SetActive(false);
+
         gameState = GameState.During;
         eventManager.enabled = true;
         for (int i = 0; i < sliders.Length; i++)
         {
             sliders[i].value--;
         }
+
+        transition = null;
     }
 
     void DuringPlay()
@@ -187,7 +194,21 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Finish");
         gameState = GameState.EndGame;
+        transition = StartCoroutine(ShowVictoryPanel());
+    }
+
+    IEnumerator ShowVictoryPanel()
+    {
+        victoryGroup.SetActive(true);
+        leftPanel.DOAnchorPos3DX(600, UIAnimationSpeed);
+
+        yield return new WaitForSeconds(UIAnimationSpeed);
+
         DisableGameplay();
+
+        StartCoroutine(WaitForRestart());
+
+        transition = null;
     }
 
     void GameOver()
@@ -195,7 +216,7 @@ public class GameManager : MonoBehaviour
         if (gameState != GameState.EndGame)
         {
             gameState = GameState.EndGame;
-            StartCoroutine(ShowGameOverPanel());
+            transition = StartCoroutine(ShowGameOverPanel());
         }
     }
 
@@ -207,7 +228,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator ShowGameOverPanel()
     {
-        leftText.text = "Game Over! Press any key to restart";
+        gameOverGroup.SetActive(true);
         leftPanel.DOAnchorPos3DX(600, UIAnimationSpeed);
 
         yield return new WaitForSeconds(UIAnimationSpeed);
@@ -215,6 +236,8 @@ public class GameManager : MonoBehaviour
         DisableGameplay();
 
         StartCoroutine(WaitForRestart());
+
+        transition = null;
     }
 
     IEnumerator WaitForRestart()
