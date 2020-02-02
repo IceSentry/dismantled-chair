@@ -101,10 +101,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   workLevelBG: {fileID: 0}
   buttonSpawners:
-  - {fileID: 2834197320333576724}
-  - {fileID: 2834197320884666851}
-  - {fileID: 2834197319469273705}
   - {fileID: 2834197320881834197}
+  - {fileID: 2834197320333576724}
+  - {fileID: 2834197319469273705}
+  - {fileID: 2834197320884666851}
   buttonIcons:
   - {fileID: -8191739510646017925, guid: a1178578399e9704fbf5910c8e61c850, type: 3}
   - {fileID: 8359661988393023892, guid: a1178578399e9704fbf5910c8e61c850, type: 3}
@@ -122,7 +122,7 @@ PrefabInstance:
     - target: {fileID: 8641331635792625043, guid: 0eb36b8c02b78d345a6ac6a88b8fb38a,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8641331635792625044, guid: 0eb36b8c02b78d345a6ac6a88b8fb38a,
         type: 3}
@@ -208,7 +208,7 @@ PrefabInstance:
     - target: {fileID: 8641331635792625043, guid: 0eb36b8c02b78d345a6ac6a88b8fb38a,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8641331635792625044, guid: 0eb36b8c02b78d345a6ac6a88b8fb38a,
         type: 3}
@@ -294,7 +294,7 @@ PrefabInstance:
     - target: {fileID: 8641331635792625043, guid: 0eb36b8c02b78d345a6ac6a88b8fb38a,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8641331635792625044, guid: 0eb36b8c02b78d345a6ac6a88b8fb38a,
         type: 3}
@@ -380,7 +380,7 @@ PrefabInstance:
     - target: {fileID: 8641331635792625043, guid: 0eb36b8c02b78d345a6ac6a88b8fb38a,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8641331635792625044, guid: 0eb36b8c02b78d345a6ac6a88b8fb38a,
         type: 3}
