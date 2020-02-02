@@ -22,7 +22,7 @@ public class EventManager : MonoBehaviour
     [Header("Event")]
     public GameEventObject[] gameEvents;
 
-    float timer = -15f;
+    float timer = -5f;
     int index = 0;
 
     private void Awake()
