@@ -246,7 +246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59b18dabf7024ca40b5e05b2923761e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popupGameList:
+  popupGameArray:
   - {fileID: 2681890684207651230, guid: 8e467cf04142a7942b8f07084381dc3b, type: 3}
   - {fileID: 7430399859125870308, guid: 4d18c86212278cd4aab07873b05a1fdf, type: 3}
   - {fileID: 5816744323072789071, guid: ea306a2d1e789e646bc3e3c19dc32e4c, type: 3}

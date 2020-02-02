@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class PopupGameManager : MonoBehaviour
 {
-    public List<GameObject> popupGameList;
+    public GameObject[] popupGameArray;
     public static PopupGameManager Instance { get; private set; }
     public int rewardValue = 1;
     private GameObject currentPopup;
 
+    int gameIndex = 0;
     private void Awake()
     {
         Instance = this;
@@ -16,15 +17,21 @@ public class PopupGameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        popupGameArray.Shuffle();
         CreatePopup();
     }
 
     public void CreatePopup()
     {
-        var popup = popupGameList[Random.Range(0, popupGameList.Count)];
+        var popup = popupGameArray[gameIndex];
         currentPopup = Instantiate(popup, transform, false);
         var renderer = currentPopup.GetComponent<SpriteRenderer>();
         renderer.enabled = true;
+        gameIndex++;
+        if (gameIndex == popupGameArray.Length)
+            gameIndex = 0;
+
+
     }
 
     public void ClosePopup()
