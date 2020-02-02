@@ -30,15 +30,16 @@ public class GameManager : MonoBehaviour
 
     [Header("Data")]
     public float globalSpeed = 1f;
-    public GameConfig gameConfig;
     public int workScene;
     public int studyScene;
     public int[] sleepScenes;
+    public GameConfig gameConfig;
 
     [Header("UI")]
     public RectTransform rightPanel;
     public RectTransform titleText;
 
+    GameConfig debuffEvent;
     GameType currentType;
     GameState gameState = GameState.Start;
     int currentScene = -1;
@@ -70,9 +71,7 @@ public class GameManager : MonoBehaviour
 
     public void DebuffConfig(GameConfig config)
     {
-        gameConfig.WorkTimer -= config.WorkTimer;
-        gameConfig.SleepTimer -= config.SleepTimer;
-        gameConfig.StudyTimer -= config.StudyTimer;
+        debuffEvent = config;
     }
 
     public void SendReward(GameType type, int reward)
@@ -119,8 +118,9 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < gameTimers.Length; i++)
         {
+            GameType gameType = (GameType)i;
             gameTimers[i] += Time.deltaTime * globalSpeed;
-            float timer = gameConfig.GetTimer((GameType)i);
+            float timer = gameConfig.GetTimer(gameType) - debuffEvent.GetTimer(gameType);
             if (gameTimers[i] >= timer)
             {
                 var slider = sliders[i];
