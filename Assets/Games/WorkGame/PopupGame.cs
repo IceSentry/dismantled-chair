@@ -13,13 +13,7 @@ public class PopupGame : MonoBehaviour
 
     const int ButtonCount = 6;
 
-    const int SpriteCount = 5;
-
     const int MaxGameCount = 3;
-
-    int Difficulty = 1;
-
-    int GameCount = 0;
 
     enum SequenceButtons
     {
@@ -31,6 +25,7 @@ public class PopupGame : MonoBehaviour
         Right_Bumper
     }
 
+    public SpriteRenderer workLevelBG;
     public SpriteRenderer[] buttonSpawners;
     public Sprite[] buttonIcons = new Sprite[ButtonCount];
     Queue<SequenceButtons> ButtonQueue = new Queue<SequenceButtons>();
@@ -41,7 +36,7 @@ public class PopupGame : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Shuffle(buttonSpawners);
+        //Shuffle(buttonSpawners);
         AddButtons();
 
     }
@@ -67,12 +62,11 @@ public class PopupGame : MonoBehaviour
     {
         if (ButtonQueue.Count == 0)
         {
-            foreach (var sprite in ButtonSpriteList)
-            {
-                Destroy(sprite.gameObject);
-            }
-            GameCount++;
-            AddButtons();
+            //foreach (var sprite in ButtonSpriteList)
+            //{
+            //    Destroy(sprite.gameObject);
+            //}
+            PopupGameManager.Instance.ClosePopup();
         }
 
 
@@ -109,15 +103,14 @@ public class PopupGame : MonoBehaviour
 
     void AddButtons()
     {
-        for (int i = 0; i < SpriteCount; i++)
+        foreach (SpriteRenderer buttonSpanwer in buttonSpawners)
         {
             SequenceButtons tmpButton = (SequenceButtons)Random.Range(0, ButtonCount);
             ButtonQueue.Enqueue(tmpButton);
             Sprite sprite = buttonIcons[(int)tmpButton];
-            buttonSpawners[i].GetComponent<SpriteRenderer>().sprite = sprite;
-            ButtonSpriteList.Add(buttonSpawners[i]);
-            buttonSpawners[i].enabled = true;
-
+            buttonSpanwer.GetComponent<SpriteRenderer>().sprite = sprite;
+            ButtonSpriteList.Add(buttonSpanwer);
+            buttonSpanwer.enabled = true;
         }
     }
 }

@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Games/Sheep/LVL7.unity
     guid: bfd697cfe5aa3d240a7ea474e884d637
+  - enabled: 1
+    path: Assets/Games/WorkGame/WorkGameScene.unity
+    guid: bee363a52d68f44489c35d192db1d017
   m_configObjects: {}
