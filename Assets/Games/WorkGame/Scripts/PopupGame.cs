@@ -32,11 +32,14 @@ public class PopupGame : MonoBehaviour
     public float breathingScalingX;
     public float breathingScalingY;
     public float breathingDuration;
+    public float buttonRewardValue = 0.5f;
 
     Queue<ButtonType> ButtonQueue = new Queue<ButtonType>();
     List<SpriteRenderer> ButtonSpriteList = new List<SpriteRenderer>();
 
     int SpriteListIndex = 0;
+    float rewardAccumulate = 0;
+
 
     // Start is called before the first frame update
     void Start()
@@ -80,12 +83,18 @@ public class PopupGame : MonoBehaviour
                                                                     ButtonSpriteList[SpriteListIndex].color.g / 2,
                                                                     ButtonSpriteList[SpriteListIndex].color.b / 2,
                                                                     ButtonSpriteList[SpriteListIndex].color.a / 2);
-                if (SpriteListIndex < ButtonSpriteList.Count-1)
+                if (SpriteListIndex < ButtonSpriteList.Count - 1)
                     SpriteListIndex++;
 
                 ButtonSpriteList[SpriteListIndex].enabled = true;
                 ButtonSpriteList[SpriteListIndex].transform.DOPunchScale(new Vector3(breathingScalingX, breathingScalingY), breathingDuration);
-                GameManager.Instance.SendReward(GameType.Work, PopupGameManager.Instance.rewardValue);
+                rewardAccumulate += buttonRewardValue;
+                if (rewardAccumulate >= 1)
+                {
+                    rewardAccumulate--;
+                    GameManager.Instance.SendReward(GameType.Work, PopupGameManager.Instance.rewardValue);
+                }
+                    
             }
             else if (buttonMask != 0)
             {
